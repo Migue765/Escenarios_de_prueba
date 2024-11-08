@@ -1,9 +1,9 @@
 # Grupo 6
 ## Integrantes
-Natalia Arango
-Jazmín Cordoba
-Miguel Gómez
-Juan Mejía
+* Natalia Arango
+* Jazmín Cordoba
+* Miguel Gómez
+* Juan Mejía
 
 ---------
 # Escenarios de prueba
