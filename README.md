@@ -7,7 +7,7 @@
 
 ---------
 # Escenarios de prueba
-En este proyecto de plantearon los 20 escenarios de prueba de 5 funcionalidades de proyecto Ghost con 2 herramientas diferentes (Kraken y Cypress)"
+En este proyecto se definieron 20 escenarios de prueba para evaluar cinco funcionalidades del proyecto Ghost, utilizando dos herramientas distintas: Kraken y Cypress.
 
 ## Funcionalidades trabajadas
 1. Registro e Inicio de Sesión 
