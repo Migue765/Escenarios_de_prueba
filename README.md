@@ -1,9 +1,9 @@
 # Grupo 6
 ## Integrantes
-* Natalia Arango
-* Jazmín Cordoba
-* Miguel Gómez
-* Juan Mejía
+* [Natalia Arango](mailto:a.arandio@uniandes.edu.co)
+* [Jazmín Cordoba](mailto:jn.cordobap1@uniandes.edu.co)
+* [Miguel Gómez](mailto:ma.gomeza1@uniandes.edu.co)
+* [Juan Mejía](mailto:je.mejiai1@uniandes.edu.co)
 
 ---------
 # Escenarios de prueba
