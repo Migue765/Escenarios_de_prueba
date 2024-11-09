@@ -35,6 +35,7 @@ En este proyecto se definieron 20 escenarios de prueba para evaluar cinco funcio
 <details>
 <summary> 2. Gestión de Contenidos (Páginas, Publicaciones, Borradores)</summary>
 
+
 **Responsable**: Miguel Alejandro Gomez Alarcon
 
 **Funcionalidad** que permite a los usuarios crear, editar y publicar contenido en forma de páginas o publicaciones.
@@ -116,7 +117,7 @@ En este proyecto se definieron 20 escenarios de prueba para evaluar cinco funcio
 
 </details>
 
-## Kraken 
+## Kraken 🐙
 Pasos de instalación y ejecución
 
 
