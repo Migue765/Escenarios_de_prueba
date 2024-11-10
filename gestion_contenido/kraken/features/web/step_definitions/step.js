@@ -29,6 +29,11 @@ When('I click new page', async function () {
     return await element.click();
 })
 
+When('I click new post', async function () {
+    let element = await this.driver.$('[data-test-new-post-button]');
+    return await element.click();
+})
+
 When('I enter title {string}', async function (title) {
     let element = await this.driver.$('.gh-editor-title');
     return await element.setValue(title);
@@ -86,6 +91,11 @@ When('I click in delete page', async function () {
 
 When('I click in confirm delete page', async function () {
     let element = await this.driver.$('[data-test-button="delete-post-confirm"]');
+    return await element.click()
+})
+
+When('I click in button published', async function () {
+    let element = await this.driver.$('data-test-nav-custom="posts-Published"');
     return await element.click()
 })
 
