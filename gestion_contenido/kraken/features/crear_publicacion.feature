@@ -16,7 +16,7 @@ Scenario: User 1 logs into Ghost
   And I press Enter
   And I wait for 1 seconds
   And I enter body text "Esto es una prueba de contenido"
-  And I wait for 20 seconds
+  And I wait for 2 seconds
   And I click publish
   And I wait for 1 seconds
   And I click in continue final review

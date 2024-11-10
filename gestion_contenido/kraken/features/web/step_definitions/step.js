@@ -95,7 +95,7 @@ When('I click in confirm delete page', async function () {
 })
 
 When('I click in button published', async function () {
-    let element = await this.driver.$('data-test-nav-custom="posts-Published"');
+    let element = await this.driver.$('[data-test-nav-custom="posts-Published"]');
     return await element.click()
 })
 
