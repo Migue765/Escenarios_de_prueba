@@ -117,6 +117,13 @@ En este proyecto se definieron 20 escenarios de prueba para evaluar cinco funcio
 
 </details>
 
+## Instalación
+
+Para utilizar las herramientas de este proyecto, asegúrate de tener instaladas las siguientes herramientas:
+
+1. **Node.js**: Se recomienda usar la versión v12.22.12. Puedes descargarlo desde [nodejs.org](https://nodejs.org/).
+2. **Ghost-admin**: El cual se puede instalar y ejecutar siguiendo la siguiente [guia](https://thesoftwaredesignlab.github.io/AutTestingCodelabs/ghost-local-deployment/index.html#1), propuesta en clase.
+
 ## Kraken 🐙
 Pasos de instalación y ejecución
 
