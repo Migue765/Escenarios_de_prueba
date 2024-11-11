@@ -14,15 +14,6 @@ When('I click login', async function () {
     return await element.click();
 })
 
-When('I click in button pages', async function () {
-    let element = await this.driver.$('[data-test-nav="pages"]');
-    return await element.click();
-})
-
-When('I click new page', async function () {
-    let element = await this.driver.$('[data-test-new-page-button]');
-    return await element.click();
-})
 
 When('I click new post', async function () {
     let element = await this.driver.$('[data-test-new-post-button]');
@@ -34,45 +25,13 @@ When('I click new member', async function () {
     return await element.click();
 })
 
-When('I enter title {string}', async function (title) {
-    let element = await this.driver.$('.gh-editor-title');
-    return await element.setValue(title);
-});
 
-When('I press Enter', async function () {
-    let element = await this.driver.$('.gh-editor-title');
-    return await element.keys('Enter');
-});
-
-When('I enter body text {string}', async function (body) {
-    let element = await this.driver.$('.pointer-events-none.absolute.left-0.top-0.min-w-full.cursor-text.font-serif.text-xl.text-grey-500.dark\\:text-grey-800');
-    return await element.setValue(body);
-});
 
 When('I click back', async function () {
     let element = await this.driver.$('.kg-prose');
     return await element.click();
 })
 
-When('I click publish', async function () {
-    let element = await this.driver.$('.gh-publish-trigger');
-    return await element.click();
-})
-
-When('I click in continue final review', async function () {
-    let element = await this.driver.$(".gh-publish-cta");
-    return await element.click();
-})
-
-When('I click in confirm publish', async function () {
-    let element = await this.driver.$(".gh-publish-cta");
-    return await element.click();
-})
-
-When('I click in close', async function () {
-    let element = await this.driver.$(".close");
-    return await element.click();
-})
 
 When('I click the first post in the list', async function () {
     let element = await this.driver.$('.gh-list-row.gh-posts-list-item.gh-post-list-plain-status a.gh-list-data.gh-post-list-title');
@@ -135,7 +94,10 @@ When('I click in button save', async function () {
     return await element.click();
 })
 
-
+When('I click the first member in the list', async function () {
+    let element = await this.driver.$('tbody.ember-view > tr[data-test-list="members-list-item"] > a[data-test-table-data="details"]');
+    return await element.click();
+});
 
 Then('I should be logged into Ghost', async function () {
     const dashboardHeader = await this.driver.$('h2.gh-canvas-title');

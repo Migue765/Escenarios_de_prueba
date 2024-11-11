@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "chai": "^5.1.2",
     "kraken": "^1.0.1",
     "kraken-node": "^1.0.24"
   }

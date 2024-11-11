@@ -1,6 +1,5 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 
-
 When('I click in button pages', async function () {
     let element = await this.driver.$('[data-test-nav="pages"]');
     return await element.click();
@@ -11,10 +10,6 @@ When('I click new page', async function () {
     return await element.click();
 })
 
-When('I click new post', async function () {
-    let element = await this.driver.$('[data-test-new-post-button]');
-    return await element.click();
-})
 
 When('I enter title {string}', async function (title) {
     let element = await this.driver.$('.gh-editor-title');
@@ -55,32 +50,6 @@ When('I click in close', async function () {
     let element = await this.driver.$(".close");
     return await element.click();
 })
-
-When('I click the first post in the list', async function () {
-    let element = await this.driver.$('.gh-list-row.gh-posts-list-item.gh-post-list-plain-status a.gh-list-data.gh-post-list-title');
-    return await element.click();
-});
-
-When('I click in settings page', async function () {
-    let element = await this.driver.$('.settings-menu-toggle');
-    return await element.click();
-})
-
-When('I click in delete page', async function () {
-    let element = await this.driver.$('.settings-menu-delete-button');
-    return await element.click();
-})
-
-When('I click in confirm delete page', async function () {
-    let element = await this.driver.$('[data-test-button="delete-post-confirm"]');
-    return await element.click()
-})
-
-When('I click in button published', async function () {
-    let element = await this.driver.$('[data-test-nav-custom="posts-Published"]');
-    return await element.click()
-})
-
 
 
 Then('I should be logged into Ghost', async function () {
