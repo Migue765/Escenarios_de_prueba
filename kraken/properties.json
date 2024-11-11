@@ -1,0 +1,13 @@
+{
+    "URL": "http://localhost:2368/ghost/#/signin",
+    "BLOG": "Test Kraken with Ghost",
+    "NAME": "Natalia Arandio",
+    "USERNAME": "a.arandio@uniandes.edu.co",
+    "EMAILFAILED": "a.arandio",
+    "PASSWORD": ".987654321.*",
+    "ERROREMAIL": "Invalid Email.",
+    "EMAIL": "a.arandio@uniandes.edu.co",
+    "ERROREMAIL2": "nataliaarandio@gmail.com",
+    "TEXTPASSWORD": "Your password is incorrect.",
+    "ERRORPASSWORD": "12341234*12"
+}
