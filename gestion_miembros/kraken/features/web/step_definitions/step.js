@@ -34,6 +34,11 @@ When('I click new post', async function () {
     return await element.click();
 })
 
+When('I click new member', async function () {
+    let element = await this.driver.$('[data-test-new-member-button="true"]');
+    return await element.click();
+})
+
 When('I enter title {string}', async function (title) {
     let element = await this.driver.$('.gh-editor-title');
     return await element.setValue(title);
@@ -99,10 +104,50 @@ When('I click in button published', async function () {
     return await element.click()
 })
 
+// Members
+When('I click in button members', async function () {
+    let element = await this.driver.$('[data-test-nav="members"]');
+    return await element.click();
+})
 
+When('I insert member name {string}', async function (name) {
+    let element = await this.driver.$('[data-test-input="member-name"]');
+    return await element.setValue(name);
+})
+
+When('I insert email {string}', async function (email) {
+    let element = await this.driver.$('[data-test-input="member-email"]');
+    return await element.setValue(email);
+})
+
+When('I insert label {string}', async function (label) {
+    let element = await this.driver.$('.ember-power-select-trigger-multiple-input');
+    return await element.setValue(label);
+})
+
+When('I select Enter on label', async function () {
+    let element = await this.driver.$('.ember-power-select-trigger-multiple-input');
+    return await element.keys('Enter');
+})
+
+When('I insert note {string}', async function (note) {
+    let element = await this.driver.$('.gh-member-details-textarea');
+    return await element.setValue(note);
+})
+
+When('I click in button save', async function () {
+    let element = await this.driver.$('[data-test-button="save"]');
+    return await element.click();
+})
+
+When('I click the first member in the list', async function () {
+    let element = await this.driver.$('tbody.ember-view > tr[data-test-list="members-list-item"] > a[data-test-table-data="details"]');
+    return await element.click();
+});
 
 Then('I should be logged into Ghost', async function () {
     const dashboardHeader = await this.driver.$('h2.gh-canvas-title');
     const headerText = await dashboardHeader.getText();
     expect(headerText).to.include('Dashboard');
 });
+
