@@ -1,0 +1,20 @@
+{
+    "URL": "http://localhost:2368/ghost/#/signin",
+    "BLOG": "Test Kraken with Ghost",
+    "NAME": "Natalia Arandio",
+    "USERNAME": "a.arandio@uniandes.edu.co",
+    "EMAILFAILED": "a.arandio",
+    "PASSWORD": ".987654321.*",
+    "ERROREMAIL": "Invalid Email.",
+    "EMAIL": "a.arandio@uniandes.edu.co",
+    "ERROREMAIL2": "nataliaarandio@gmail.com",
+    "TEXTPASSWORD": "Your password is incorrect.",
+    "ERRORPASSWORD": "12341234*12",
+    "NAME-TAG": "New Spectacular Tag",
+    "NEW-NAME-TAG": "New Name for Spectacular Tag",
+    "TAG-1": "Tag example 1",
+    "TAG-2": "Tag example 2",
+    "TAG-3": "Tag example 3",
+    "TAG-COLOR": "FF5733",
+    "DESCRIPTION": "This is a description for the new tag. It is a very long description that will be used to test the functionality of the tag creation process. This is a description for the new tag. It is a very long description that will be used to test the functionality of the tag creation process. This is a description for the new tag. It is a very long description that will be used to test the functionality of the tag creation process."
+}
