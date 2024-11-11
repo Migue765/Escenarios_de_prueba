@@ -1,7 +1,7 @@
 Feature: User Registration and Validation in Ghost
   @user2 @web
   Scenario: As a user, I leave the fields empty during registration
-    Given I navigate to page "http://localhost:2368/ghost/#/setup"
+    Given I navigate to page "<URL>"
     When I click on register
     Then I should see the following errors:
       | Field         | Error Message                             |

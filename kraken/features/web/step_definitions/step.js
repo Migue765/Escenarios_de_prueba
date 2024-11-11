@@ -58,7 +58,7 @@ Then('I should see the following errors:', async function (dataTable) {
 
 Then('I should see the dashboard or a logged-in page', async function () {
   const currentUrl = await this.driver.getUrl();
-  assert.strictEqual(currentUrl, 'http://localhost:2368/ghost/#/dashboard', 'El inicio de sesión no fue exitoso, la URL no es la esperada');
+  assert.strictEqual(currentUrl, 'http://localhost:2369/ghost/#/dashboard', 'El inicio de sesión no fue exitoso, la URL no es la esperada');
 
 });
 

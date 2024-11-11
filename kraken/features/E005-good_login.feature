@@ -2,7 +2,7 @@ Feature: User Registration and Validation in Ghost
 
 @user1 @web
 Scenario: As a user, I log in and validate the title
-  Given I navigate to page "http://localhost:2368/ghost/#/signin"
+  Given I navigate to page "<URL>"
   And I wait for 3 seconds
   Then I should see the title "<BLOG>"
   And I wait for 3 seconds
