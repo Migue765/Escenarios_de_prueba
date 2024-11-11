@@ -2,10 +2,10 @@ Feature: Gestión de Configuración (Settings)
 
   @user1 @web
   Scenario: Eliminar una integración y verificar que desaparezca de la lista
-    Given navego a "http://localhost:2368/ghost"
+    Given navego a "<URL>"
     When espero 5 segundos
-    And ingreso el correo electrónico "jn.cordobap1@uniandes.edu.co"
-    And ingreso la contraseña "-:pM7A388!aDufu"
+    And ingreso el correo electrónico "<EMAIL>"
+    And ingreso la contraseña "<PASSWORD>"
     And hago clic en iniciar sesión
     And hago clic en el botón de configuración
     And navego a la página de configuración avanzada
