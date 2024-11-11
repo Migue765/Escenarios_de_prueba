@@ -140,10 +140,7 @@ When('I click in button save', async function () {
     return await element.click();
 })
 
-When('I click the first member in the list', async function () {
-    let element = await this.driver.$('tbody.ember-view > tr[data-test-list="members-list-item"] > a[data-test-table-data="details"]');
-    return await element.click();
-});
+
 
 Then('I should be logged into Ghost', async function () {
     const dashboardHeader = await this.driver.$('h2.gh-canvas-title');
