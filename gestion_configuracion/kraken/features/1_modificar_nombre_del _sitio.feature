@@ -11,6 +11,6 @@ Feature: Gestión de Configuración (Settings)
     When hago clic en el botón de editar título y descripción
     When ingreso el título "Nuevo Título del Sitio"
     When guardo la página
-    Then envío una señal al usuario 1 que contiene "El nombre del sitio ha sido modificado"
+    Then el nombre del sitio debería ser "Nuevo Título del Sitio"
 
  

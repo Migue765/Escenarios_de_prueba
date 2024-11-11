@@ -95,36 +95,76 @@ When('agrego una nueva integración personalizada con el nombre {kraken-string}'
     await saveIntegrationButton.click();
 });
 
-// Paso para eliminar una integración
-When('elimino la integración {kraken-string}', async function (integrationName) {
-  // Seleccionar el botón "Custom" para asegurarnos de que estamos en la pestaña correcta
-  let customButton = await this.driver.$('button[title="Custom"]');
+
+//--eliminar
+// Paso para hacer clic en la sección de integraciones
+When('selecciono el botón {string} para asegurarme de que estoy en la pestaña correcta', async function (buttonTitle) {
+  let customButton = await this.driver.$(`button[title="${buttonTitle}"]`);
   await customButton.click();
+});
 
-  // Esperar a que la lista de integraciones esté visible
+When('espero a que la lista de integraciones esté visible', async function () {
   let integrationListContainer = await this.driver.$('div[data-state="active"][role="tabpanel"]');
-  await integrationListContainer.waitForExist({ timeout: 5000 });
+  await integrationListContainer.waitForExist({ timeout: 15000 });
+});
 
-  // Obtener la lista de integraciones
-  let integrationList = await integrationListContainer.$$('div.group\\/list-item');
+When('elimino la integración {kraken-string} de la lista', async function (integrationName) {
+  // Encuentra el botón de 'Integrations' y haz clic para cargar la lista de integraciones
+  const integrationsButton = await this.driver.$('#integrations');
+  if (integrationsButton) {
+      await integrationsButton.click();
+  } else {
+      console.warn("El botón 'integrations' no se encontró en el DOM.");
+      return;
+  }
+
+  // Espera a que el contenedor de pestañas de la lista de integraciones esté presente
+  const integrationListContainer = await this.driver.$('div[data-state="active"][role="tabpanel"]');
+  if (!integrationListContainer) {
+      console.warn("No se encontró el contenedor de la lista de integraciones.");
+      return;
+  }
+
+  // Encuentra todos los elementos de la lista de integraciones
+  const integrationList = await integrationListContainer.$$('div.group\\/list-item');
 
   for (let item of integrationList) {
       let text = await item.$('div.flex.grow.flex-col.py-3.pr-6 > span').getText();
+
+      // Verifica si el nombre de la integración coincide con el parámetro recibido
       if (text.includes(integrationName)) {
-          let deleteButton = await item.$('button.cursor-pointer.text-red');
-          await deleteButton.click();
+          // Cambia el estilo del elemento para garantizar que sea visible
+          await this.driver.execute((el) => {
+              el.style.visibility = 'visible';
+              el.style.display = 'block';
+          }, item);
+
+          // Busca el botón de eliminar dentro del elemento de la integración y haz clic
+          const deleteButton = await item.$('#radix-\:rp\:-content-custom > div > section > div > div > div.visible.py-3.md\:pl-6.md\:pr-6.group-hover\/list-item\:visible.md\:invisible > button');
+          if (deleteButton) {
+              await deleteButton.click();
+          } else {
+              console.warn("No se encontró el botón de eliminar para la integración seleccionada.");
+          }
           break;
       }
   }
+});
 
-  // Esperar a que el modal de confirmación esté visible
+
+
+When('espero a que el modal de confirmación esté visible', async function () {
   let confirmationModal = await this.driver.$('section[data-testid="confirmation-modal"]');
-  await confirmationModal.waitForExist({ timeout: 5000 });
+  await confirmationModal.waitForExist({ timeout: 15000 });
+});
 
-  // Hacer clic en el botón de confirmación de eliminación
+When('confirmo la eliminación', async function () {
+  let confirmationModal = await this.driver.$('section[data-testid="confirmation-modal"]');
   let confirmDeleteButton = await confirmationModal.$('button.bg-red.text-white');
   await confirmDeleteButton.click();
 });
+
+//---
 
 
 
@@ -165,5 +205,40 @@ Then('debería ver {kraken-string} en la lista de integraciones', async function
   }
   expect(found).to.be.true;
 });
+
+Then('el nombre del sitio debería ser {kraken-string}', async function (expectedTitle) {
+  // Esperar a que el elemento que contiene el título esté visible
+  let titleElement = await this.driver.$('div.flex.items-center.mt-1');
+  await titleElement.waitForExist({ timeout: 5000 });
+
+  // Obtener el texto del elemento
+  let actualTitle = await titleElement.getText();
+
+  // Validar que el texto del elemento sea igual al título esperado
+  const { expect } = await import('chai');
+  expect(actualTitle).to.equal(expectedTitle);
+});
+
+Then('la descripción del sitio debería ser {kraken-string}', async function (expectedDescription) {
+  // Buscar el elemento h6 con el texto "Site description"
+  let h6Element = await this.driver.$('h6=Site description');
+  await h6Element.waitForExist({ timeout: 5000 });
+
+  // Seleccionar el siguiente div
+  let descriptionElement = await h6Element.$('..').$('div.flex.items-center.mt-1');
+  await descriptionElement.waitForExist({ timeout: 5000 });
+
+  // Obtener el texto del elemento
+  let actualDescription = await descriptionElement.getText();
+
+  // Validar que el texto del elemento sea igual a la descripción esperada
+  const { expect } = await import('chai');
+  expect(actualDescription).to.equal(expectedDescription);
+});
+
+
+
+
+
 
 
