@@ -7,7 +7,7 @@ Given('navego a {kraken-string}', async function (url) {
 
 // Paso para esperar un tiempo determinado
 When('espero {int} segundos', async function (seconds) {
-    await this.driver.pause(seconds * 1000); // Multiplicamos por 1000 para convertir segundos en milisegundos
+    await this.driver.pause(seconds * 1000); 
 });
 
 // Paso para ingresar el correo electrónico
@@ -42,13 +42,13 @@ When('hago clic en el botón de nueva página', async function () {
 
 // Paso para ingresar el título de la página
 When('ingreso el título {kraken-string}', async function (title) {
-    let titleInput = await this.driver.$('#\\:r1a\\:'); // Asegúrate de que este selector sea correcto
+    let titleInput = await this.driver.$('#\\:r1a\\:'); 
     await titleInput.setValue(title);
 });
 
 // Paso para ingresar la descripción de la página
 When('ingreso la descripción {kraken-string}', async function (description) {
-    let descriptionInput = await this.driver.$('#\\:r1c\\:'); // Asegúrate de que este selector sea correcto
+    let descriptionInput = await this.driver.$('#\\:r1c\\:'); 
     await descriptionInput.setValue(description);
 });
 
@@ -72,7 +72,7 @@ Then('envío una señal al usuario 1 que contiene {kraken-string}', async functi
 // Paso para navegar a la página de configuración avanzada
 When('navego a la página de configuración avanzada', async function () {
     let settingsButton = await this.driver.$('#integrations');
-    await settingsButton.waitForExist({ timeout: 5000 }); // Espera hasta 5 segundos para que el botón esté disponible
+    await settingsButton.waitForExist({ timeout: 5000 }); 
     await settingsButton.scrollIntoView();
     await settingsButton.click();
 });
@@ -95,7 +95,7 @@ When('elimino la integración {kraken-string}', async function (integrationName)
     for (let item of integrationList) {
         let text = await item.getText();
         if (text.includes(integrationName)) {
-            let deleteButton = await item.$('button'); // Asegúrate de que este selector sea correcto
+            let deleteButton = await item.$('button'); 
             await deleteButton.click();
             break;
         }
@@ -104,7 +104,7 @@ When('elimino la integración {kraken-string}', async function (integrationName)
 
 // Paso para habilitar la suscripción a newsletters
 When('habilito la suscripción a newsletters', async function () {
-    let newsletterToggle = await this.driver.$('#\\:ro\\:'); // Asegúrate de que este selector sea correcto
+    let newsletterToggle = await this.driver.$('#\\:ro\\:'); 
     await newsletterToggle.click();
 });
 
