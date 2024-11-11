@@ -1,5 +1,6 @@
 {
-  "dependencies": {
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.0.1",
     "kraken-node": "^1.0.24"
   }
 }
