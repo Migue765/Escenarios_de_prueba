@@ -1,18 +1,13 @@
 describe('Filter posts by tag', () => {
-    const EMAIL = "juanes.reich@gmail.com";
-    const PASSWORD = "6-pVzAeXxT9Uq_-";
-    const NEW_NAME_TAG = 'Edited Spectacular Tag';
+    const LOCAL_HOST = Cypress.env('LOCAL_HOST');
+    const NAME_TAG_2 = Cypress.env('NAME_TAG_2');
 
-    before(() => {
-        cy.visit("http://localhost:2369/ghost/");
+    beforeEach("Precondition: Admin login", () => {
+        cy.LoginGhost();
     });
 
     it('Filter posts by tag', () => {
-        cy.get('input[type="email"]').type(EMAIL);
-        cy.wait(2000);
-        cy.get('input[type="password"]').type(PASSWORD);
-        cy.wait(2000);
-        cy.get('span[data-test-task-button-state="idle"]').click();
+        cy.visit(LOCAL_HOST + "#/dashboard");
         cy.wait(4000);
 
         cy.get('a[data-test-nav="posts"]').click();
@@ -21,7 +16,8 @@ describe('Filter posts by tag', () => {
         cy.get('div.gh-contentfilter-menu.gh-contentfilter-tag[data-test-tag-select="true"]').click();
         cy.wait(2000);
 
-        cy.get('div.gh-contentfilter-menu-dropdown li.ember-power-select-option').contains(NEW_NAME_TAG).click();
-        cy.wait(4000);
+        cy.get('div.gh-contentfilter-menu-dropdown li.ember-power-select-option').contains(NAME_TAG_2).should('exist').click();
+        cy.wait(2000);
+
     });
 });
