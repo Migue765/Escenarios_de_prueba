@@ -40,15 +40,14 @@ describe('Create user and login', () => {
     cy.url().should('include', '/ghost/#/members');
 
     // Crear una nueva página
-    cy.get('.gh-members-list-row').first().click();
+    cy.get('[data-test-new-member-button]').click();
     cy.wait(2000);
-    cy.url().should('include', '/ghost/#/members');
-    cy.get('[data-test-input="member-name"]').clear();
-    cy.get('[data-test-input="member-name"]').type('Miguel Gómez');
-    cy.get('[data-test-input="member-email"]').clear();
+    cy.url().should('include', '/ghost/#/members/new');
+
+    cy.get('[data-test-input="member-name"]').type('John Doe');
     cy.get('[data-test-input="member-email"]').type('test2a25@test.com');
-    cy.get('.ember-power-select-trigger-multiple-input').type('Test Label 2{enter}');
-    cy.get('[data-test-input="member-note"]').type('Editetd Note');
+    cy.get('.ember-power-select-trigger-multiple-input').type('Test Label{enter}');
+    cy.get('[data-test-input="member-note"]').type('Test Note');
 
     cy.get('[data-test-button="save"]').click();
 
