@@ -6,7 +6,7 @@ describe('Delete Integration', () => {
         cy.LoginGhost();
     });
 
-    //TODO: Fix the test
+    //TODO: Fix the this scenario because the integration is not deleted
     it.skip('Process to delete an integration and verify it disappears from the list', () => {
         cy.visit(LOCAL_HOST + "#/settings");
         cy.get('#integrations').scrollIntoView()
