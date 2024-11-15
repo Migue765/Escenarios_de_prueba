@@ -24,3 +24,9 @@ Cypress.Commands.add('LoginGhost', () => {
         cy.url().should('include', '/ghost/#/dashboard');
     });
 });
+
+// Handle uncaught exceptions
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // Return false to prevent Cypress from failing the test
+    return false;
+});

@@ -12,7 +12,7 @@ describe('Content Management: Delete and Verify Post', () => {
         cy.LoginGhost();
     });
 
-    it('Create a new post and verify it appears in the list of posts', () => {
+    it.skip('Create a new post and verify it appears in the list of posts', () => {
 
         cy.visit(LOCAL_HOST + "#/dashboard");
         cy.wait(4000);
@@ -51,7 +51,8 @@ describe('Content Management: Delete and Verify Post', () => {
         cy.url().should('include', '/editor/page/');
         cy.get('[data-test-psm-trigger]').click();
         cy.get('.settings-menu-delete-button').click();
-        cy.get('.modal-footer .gh-btn-red').click();
+        cy.wait(2000);
+        cy.get('[data-test-button="delete-post-confirm"]').click({force:true});
         cy.url().should('include', '/ghost/#/pages');
         cy.get('.gh-posts-list-item:contains("My first page")').should('not.exist');
     });

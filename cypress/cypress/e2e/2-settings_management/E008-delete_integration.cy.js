@@ -10,6 +10,7 @@ describe('Delete Integration', () => {
     it.skip('Process to delete an integration and verify it disappears from the list', () => {
         cy.visit(LOCAL_HOST + "#/settings");
         cy.get('#integrations').scrollIntoView()
+        cy.wait(3000);
         cy.get('#integrations').click();
         cy.get('button[title="Custom"]').click();
         cy.wait(3000);

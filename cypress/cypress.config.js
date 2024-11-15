@@ -7,7 +7,7 @@ module.exports = defineConfig({
     },
     env: {
       LOCAL_HOST: "http://localhost:2369/ghost/",
-      EMAIL: "juanes.reich@gmail.com",
+      EMAIL: "test@test.com",
       PASSWORD: "6-pVzAeXxT9Uq_-",
       NAME: "Jaime Larson",
       NAME_TAG_1: 'New Spectacular Tag 1',
