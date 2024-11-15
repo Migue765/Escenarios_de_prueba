@@ -1,4 +1,4 @@
-describe('Create user and login', () => {
+describe('Member Management: Add and Verify Member', () => {
 
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
 
@@ -12,7 +12,7 @@ describe('Create user and login', () => {
         return false;
     });
 
-    it('creates a new user and logs in', () => {
+    it('Add a new member and verify it appears in the list of members', () => {
 
         cy.visit(LOCAL_HOST + "#/dashboard");
         cy.wait(4000);

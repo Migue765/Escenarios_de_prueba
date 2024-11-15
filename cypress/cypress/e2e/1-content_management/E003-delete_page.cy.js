@@ -1,4 +1,4 @@
-describe('Delete page tests', () => {
+describe('Content Management: Delete and Verify Post', () => {
 
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
 
@@ -12,7 +12,7 @@ describe('Delete page tests', () => {
         cy.LoginGhost();
     });
 
-    it('should navigate to the pages section', () => {
+    it('Create a new post and verify it appears in the list of posts', () => {
 
         cy.visit(LOCAL_HOST + "#/dashboard");
         cy.wait(4000);
@@ -45,7 +45,7 @@ describe('Delete page tests', () => {
     });
 
     it('should delete the selected page', () => {
-        cy.get('[data-test-nav="pages"]').click();
+        cy.visit(LOCAL_HOST + "#/pages");
         cy.url().should('include', '/ghost/#/pages');
         cy.get('.gh-posts-list-item').first().click();
         cy.url().should('include', '/editor/page/');
@@ -53,6 +53,6 @@ describe('Delete page tests', () => {
         cy.get('.settings-menu-delete-button').click();
         cy.get('.modal-footer .gh-btn-red').click();
         cy.url().should('include', '/ghost/#/pages');
-        cy.get('.gh-posts-list-item').should('not.exist');
+        cy.get('.gh-posts-list-item:contains("My first page")').should('not.exist');
     });
 });

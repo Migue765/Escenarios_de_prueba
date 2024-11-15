@@ -1,4 +1,4 @@
-describe('Create user and login', () => {
+describe('Content Management: Create and Verify Post', () => {
 
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
 
@@ -12,7 +12,7 @@ describe('Create user and login', () => {
         return false;
     });
 
-    it('creates a new user and logs in', () => {
+    it('Create a new post and verify it appears in the list of posts', () => {
 
         cy.visit(LOCAL_HOST + "#/dashboard");
         cy.wait(4000);
