@@ -1,56 +1,38 @@
 describe('Create user and login', () => {
-  // Manejar excepciones no capturadas
-  Cypress.on('uncaught:exception', (err, runnable) => {
-    // Devuelve false para evitar que Cypress falle la prueba
-    return false;
-  });
-  it('creates a new user and logs in', () => {
-    cy.visit('http://localhost:2368/ghost/#/setup');
 
-    cy.wait(2000);
-    // Verificar si estamos en la página de configuración o de inicio de sesión
-    cy.url().then((url) => {
-      if (url.includes('/setup')) {
-        // Llenar el formulario de creación de usuario
-        cy.get('#blog-title').type('My Blog');
-        cy.get('#name').type('John Doe');
-        cy.get('#email').type('john.doe@example.com');
-        cy.get('#password').type('contra-contra-seña-123');
-        cy.get('[data-test-button="setup"]').click();
+    const LOCAL_HOST = Cypress.env('LOCAL_HOST');
 
-        // Esperar a que se complete la creación del usuario
-        cy.wait(5000);
-      } else {
-        // Iniciar sesión con el usuario existente
-        cy.visit('http://localhost:2368/ghost/#/signin');
-        cy.get('#identification').type('john.doe@example.com');
-        cy.get('#password').type('contra-contra-seña-123');
-        cy.get('[data-test-task-button-state="idle"]').click();
-      }
+    beforeEach("Precondition: Admin login", () => {
+        cy.LoginGhost();
     });
 
-    // Verificar que el usuario ha iniciado sesión correctamente
-    cy.url().should('include', '/ghost/#/dashboard');
+    // Handle uncaught exceptions
+    Cypress.on('uncaught:exception', (err, runnable) => {
+        // Return false to prevent Cypress from failing the test
+        return false;
+    });
 
-    // Verificar que el usuario ha iniciado sesión correctamente
-    cy.url().should('include', '/ghost/#/dashboard');
+    it('creates a new user and logs in', () => {
 
-    // Entrar en la sección de páginas
-    cy.get('[data-test-nav="members"]').click();
-    cy.url().should('include', '/ghost/#/members');
+        cy.visit(LOCAL_HOST + "#/dashboard");
+        cy.wait(4000);
 
-    // Crear una nueva página
-    cy.get('[data-test-new-member-button]').click();
-    cy.wait(2000);
-    cy.url().should('include', '/ghost/#/members/new');
+        // Enter the members section
+        cy.get('[data-test-nav="members"]').click();
+        cy.url().should('include', '/ghost/#/members');
 
-    cy.get('[data-test-input="member-name"]').type('John Doe');
-    cy.get('[data-test-input="member-email"]').type('test2a25@test.com');
-    cy.get('.ember-power-select-trigger-multiple-input').type('Test Label{enter}');
-    cy.get('[data-test-input="member-note"]').type('Test Note');
+        // Create a new member
+        cy.get('[data-test-new-member-button]').click();
+        cy.wait(2000);
+        cy.url().should('include', '/ghost/#/members/new');
 
-    cy.get('[data-test-button="save"]').click();
+        cy.get('[data-test-input="member-name"]').type('John Doe');
+        cy.get('[data-test-input="member-email"]').type('test2a25@test.com');
+        cy.get('.ember-power-select-trigger-multiple-input').type('Test Label{enter}');
+        cy.get('[data-test-input="member-note"]').type('Test Note');
 
-    cy.url().should('include', '/ghost/#/members');
-  });
+        cy.get('[data-test-button="save"]').click();
+
+        cy.url().should('include', '/ghost/#/members');
+    });
 });
