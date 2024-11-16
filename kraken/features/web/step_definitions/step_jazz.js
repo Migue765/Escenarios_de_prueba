@@ -115,11 +115,10 @@ Then('debería ver {kraken-string} en la lista de integraciones', async function
     const integrationListContainer = await this.driver.$('div[data-state="active"][role="tabpanel"]');
     await integrationListContainer.waitForExist({ timeout: 5000 });
 
-    const integrationDiv = await integrationListContainer.$('div[data-testid="integrations"]');
+    const integrationDiv = await integrationListContainer.$('//*[@id="radix-:rp:-content-custom"]/div/section/div');
     await integrationDiv.waitForExist({ timeout: 5000 });
 
     const childElements = await integrationDiv.$$('*'); 
-    console.log('Componentes hijos:', childElements);
 
     const childTexts = await Promise.all(
         childElements.map(async (child) => await child.getText())
