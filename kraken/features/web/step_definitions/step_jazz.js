@@ -85,14 +85,49 @@ When('navego a la página de configuración avanzada', async function () {
 
 // Paso para agregar una nueva integración personalizada
 When('agrego una nueva integración personalizada con el nombre {kraken-string}', async function (integrationName) {
+    // Esperar y hacer clic en el botón "Agregar integración".
     let addIntegrationButton = await this.driver.$('#admin-x-settings-scroller > div > div:nth-child(6) > div > div:nth-child(1) > div.flex.items-start.justify-between.gap-4 > div:nth-child(2) > button');
+    await addIntegrationButton.waitForClickable({ timeout: 5000 });
     await addIntegrationButton.click();
 
+    // Esperar el campo de entrada para el nombre de integración.
     let integrationNameInput = await this.driver.$('input[placeholder="Custom integration"]');
+    await integrationNameInput.waitForExist({ timeout: 5000 });
     await integrationNameInput.setValue(integrationName);
 
+    // Esperar y hacer clic en el botón "Guardar integración".
     let saveIntegrationButton = await this.driver.$('#modal-backdrop button.bg-black.text-white');
+    await saveIntegrationButton.waitForClickable({ timeout: 5000 });
     await saveIntegrationButton.click();
+
+    // Esperar y hacer clic en el botón "Cerrar".
+    let closeButton = await this.driver.$('/html/body/div[2]/div/main/div[1]/div/div/div[4]/section/div[2]/div[2]/div/div[2]/div/button[1]');
+    await closeButton.waitForClickable({ timeout: 5000 });
+    await closeButton.click();
+});
+
+Then('debería ver {kraken-string} en la lista de integraciones', async function (integrationName) {
+    const { expect } = await import('chai');
+
+    const customButton = await this.driver.$('button[title="Custom"]');
+    await customButton.click();
+
+    const integrationListContainer = await this.driver.$('div[data-state="active"][role="tabpanel"]');
+    await integrationListContainer.waitForExist({ timeout: 5000 });
+
+    const integrationDiv = await integrationListContainer.$('div[data-testid="integrations"]');
+    await integrationDiv.waitForExist({ timeout: 5000 });
+
+    const childElements = await integrationDiv.$$('*'); 
+    console.log('Componentes hijos:', childElements);
+
+    const childTexts = await Promise.all(
+        childElements.map(async (child) => await child.getText())
+    );
+
+    const containsExpectedText = childTexts.some((text) => text.includes(integrationName));
+
+    expect(containsExpectedText).to.be.true;
 });
 
 
@@ -181,30 +216,10 @@ When('hago clic en el botón de editar título y descripción', async function (
 
 
 
-Then('debería ver {kraken-string} en la lista de integraciones', async function (integrationName) {
-    const { expect } = await import('chai');
 
-    // Seleccionar el botón "Custom" para asegurarnos de que estamos en la pestaña correcta
-    let customButton = await this.driver.$('button[title="Custom"]');
-    await customButton.click();
 
-    // Esperar a que la lista de integraciones esté visible
-    let integrationListContainer = await this.driver.$('div[data-state="active"][role="tabpanel"]');
-    await integrationListContainer.waitForExist({ timeout: 5000 });
 
-    // Obtener la lista de integraciones
-    let integrationList = await integrationListContainer.$$('div.group\\/list-item');
 
-    let found = false;
-    for (let item of integrationList) {
-        let text = await item.$('div.flex.grow.flex-col.py-3.pr-6 > span').getText();
-        if (text.includes(integrationName)) {
-            found = true;
-            break;
-        }
-    }
-    expect(found).to.be.true;
-});
 
 Then('el nombre del sitio debería ser {kraken-string}', async function (expectedTitle) {
     // Esperar a que el elemento que contiene el título esté visible
