@@ -6,6 +6,13 @@ describe('Manage tags and sections', () => {
     const NAME_TAG_2 = Cypress.env('NAME_TAG_2');
     const TAG_COLOR = Cypress.env('TAG_COLOR');
     const DESCRIPTION = Cypress.env('DESCRIPTION');
+    const SCREENSHOT_PATH = '4-tag_management/E011-manage_tags_before/manage_tags';
+    let screenshotCounter = 1;
+
+    function takeScreenshot() {
+        cy.screenshot(`${SCREENSHOT_PATH}_${screenshotCounter}`);
+        screenshotCounter++;
+    }
 
     beforeEach("Precondition: Admin login", () => {
         cy.LoginGhost();
@@ -14,38 +21,49 @@ describe('Manage tags and sections', () => {
     it('Create a new tag and verify it', () => {
 
         cy.visit(LOCAL_HOST + "#/dashboard");
-        cy.wait(4000);
+        cy.wait(3000);
+        takeScreenshot();
         cy.get('a[data-test-nav="tags"]').click();
-        cy.wait(2000);
+        cy.wait(1000);
+        takeScreenshot();
         cy.get('a[href="#/tags/new/"].gh-btn.gh-btn-primary').click();
         cy.wait(1000);
+        takeScreenshot();
         cy.get('input[data-test-input="tag-name"]').type(NAME_TAG_1);
-        cy.wait(1000);
+        takeScreenshot();
         cy.get('input[data-test-input="accentColor"]').type(TAG_COLOR);
-        cy.wait(1000);
+        takeScreenshot();
         cy.get('textarea[data-test-input="tag-description"]').type(DESCRIPTION);
         cy.wait(1000);
+        takeScreenshot();
         cy.get('span[data-test-task-button-state="idle"]').click();
         cy.wait(2000);
+        takeScreenshot();
 
         cy.get('a[data-test-nav="tags"]').click();
         cy.wait(2000);
+        takeScreenshot();
         cy.get('a[href="#/tags/new/"].gh-btn.gh-btn-primary').click();
         cy.wait(1000);
+        takeScreenshot();
         cy.get('input[data-test-input="tag-name"]').type(NAME_TAG_2);
-        cy.wait(1000);
+        takeScreenshot();
         cy.get('input[data-test-input="accentColor"]').type(TAG_COLOR);
-        cy.wait(1000);
+        takeScreenshot();
         cy.get('textarea[data-test-input="tag-description"]').type(DESCRIPTION);
         cy.wait(1000);
+        takeScreenshot();
         cy.get('span[data-test-task-button-state="idle"]').click();
         cy.wait(2000);
+        takeScreenshot();
 
         cy.get('a[data-test-nav="tags"]').click();
         cy.wait(3000);
+        takeScreenshot();
 
         cy.contains(NAME_TAG_1).should('exist');
+        takeScreenshot();
         cy.contains(NAME_TAG_2).should('exist');
-
+        takeScreenshot();
     });
 });

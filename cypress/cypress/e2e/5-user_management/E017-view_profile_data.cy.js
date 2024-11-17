@@ -7,6 +7,7 @@ describe('View Profile Data', () => {
     });
 
     it('Verify that the system displays the user\'s name, email, and other personal data in their profile', () => {
+
         cy.visit(LOCAL_HOST + "#/dashboard");
         cy.wait(4000);
 

@@ -1,6 +1,7 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
+const assert = require('assert');
 
-When('I click in button pages', async function () {
+Given('I click in button pages', async function () {
     let element = await this.driver.$('[data-test-nav="pages"]');
     return await element.click();
 })
@@ -93,8 +94,9 @@ When('I click back', async function () {
 
 
 When('I click the first post in the list', async function () {
-    let element = await this.driver.$('.gh-list-row.gh-posts-list-item.gh-post-list-plain-status a.gh-list-data.gh-post-list-title');
-    return await element.click();
+    const pages = await this.driver.$("div.posts-list")
+    const pageItem = await pages.$('div.gh-posts-list-item-group');
+    return await await pageItem.click();
 });
 
 When('I click in settings page', async function () {
@@ -164,3 +166,62 @@ Then('I should be logged into Ghost', async function () {
     expect(headerText).to.include('Dashboard');
 });
 
+
+Then('I should be the page in the list with name {string}', async function (title) {
+    const page = await this.driver.$('div.posts-list').$('div.gh-posts-list-item-group').$('li.gh-list-row').$('h3')
+    const pageTitle = await page.getText();
+    console.log(pageTitle)
+    assert.equal(pageTitle, title)
+});
+
+Then('I delete all pages', async function () {
+    const pages = await this.driver.$("div.posts-list")
+    const pageItems = await pages.$$('div.gh-posts-list-item-group');
+    for (let i = 0; i < pageItems.length; i++) {
+        let pageItem = pageItems[i];
+        await pageItem.click();
+        await this.driver.pause(1000);
+        let settingsButton = await this.driver.$('.settings-menu-toggle');
+        await settingsButton.click();
+        let deleteButton = await this.driver.$('.settings-menu-delete-button');
+        await deleteButton.click();
+        let confirmDeleteButton = await this.driver.$('[data-test-button="delete-post-confirm"]');
+        await confirmDeleteButton.click();
+    }
+})
+
+
+
+Then('I should dont be the page in the list with name {string}', async function (title) {
+    const pages = await this.driver.$("div.posts-list")
+    const pageItems = await pages.$$('div.gh-posts-list-item-group');
+    for (let i = 0; i < pageItems.length; i++) {
+        let pageItem = pageItems[i];
+        const pageTitle = await pageItem.$('li.gh-list-row').$('h3').getText();
+        assert.notEqual(pageTitle, title)
+    }
+});
+
+//Members validation
+Then('I should be the member in the list with name {string}', async function (name) {
+    const member = await this.driver.$('table.gh-list').$('[data-test-list="members-list-item"]').$('h3')
+    const mamberName = await member.getText();
+    console.log(mamberName)
+    assert.equal(mamberName, name)
+});
+
+
+Then('I delete all members', async function () {
+    const members = await this.driver.$('table.gh-list').$$('[data-test-list="members-list-item"]')
+    for (let i = 0; i < members.length; i++) {
+        let member = members[i];
+        await member.click();
+        await this.driver.pause(1000);
+        let settingsButton = await this.driver.$('[data-test-button="member-actions"]');
+        await settingsButton.click();
+        let deleteButton = await this.driver.$('[data-test-button="delete-member"]');
+        await deleteButton.click();
+        let confirmDeleteButton = await this.driver.$('[data-test-button="confirm"]');
+        await confirmDeleteButton.click();
+    }
+})

@@ -25,6 +25,32 @@ Cypress.Commands.add('LoginGhost', () => {
     });
 });
 
+Cypress.Commands.add('createTags', () => {
+    const LOCAL_HOST = Cypress.env('LOCAL_HOST');
+    const NAME_TAG_1 = Cypress.env('NAME_TAG_1');
+    const NAME_TAG_2 = Cypress.env('NAME_TAG_2');
+    const TAG_COLOR = Cypress.env('TAG_COLOR');
+    const DESCRIPTION = Cypress.env('DESCRIPTION');
+
+    cy.visit(LOCAL_HOST + "#/tags/new");
+    cy.wait(2000);
+    cy.get('input[data-test-input="tag-name"]').type(NAME_TAG_1);
+    cy.get('input[data-test-input="accentColor"]').type(TAG_COLOR);
+    cy.get('textarea[data-test-input="tag-description"]').type(DESCRIPTION);
+    cy.wait(1000);
+    cy.get('span[data-test-task-button-state="idle"]').click();
+    cy.wait(1000);
+
+    cy.visit(LOCAL_HOST + "#/tags/new");
+    cy.wait(1000);
+    cy.get('input[data-test-input="tag-name"]').type(NAME_TAG_2);
+    cy.get('input[data-test-input="accentColor"]').type(TAG_COLOR);
+    cy.get('textarea[data-test-input="tag-description"]').type(DESCRIPTION);
+    cy.wait(1000);
+    cy.get('span[data-test-task-button-state="idle"]').click();
+    cy.wait(2000);
+});
+
 // Handle uncaught exceptions
 Cypress.on('uncaught:exception', (err, runnable) => {
     // Return false to prevent Cypress from failing the test

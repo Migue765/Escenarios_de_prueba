@@ -2,13 +2,7 @@ Feature: Crear un nuevo miembro
 
 @user1 @web
 Scenario: User 1 logs into Ghost
-  Given I navigate to "<URL>"
-  And I wait for 1 seconds
-  When I enter the email "<USERNAME>"
-  And I enter password "<PASSWORD>"
-  And I click login
-  And I wait for 1 seconds
-  And I click in button members
+  Given I click in button members
   And I wait for 1 seconds
   And I click new member
   And I wait for 1 seconds
@@ -26,5 +20,10 @@ Scenario: User 1 logs into Ghost
   And I wait for 2 seconds
   And I click in button members
   And I wait for 1 seconds
-  Then I send a signal to user 1 containing "login1 complete"
+  Then I should be the member in the list with name "username1"
+
+
+  ## Clean test
+  And I wait for 2 seconds
+  And I delete all members
   

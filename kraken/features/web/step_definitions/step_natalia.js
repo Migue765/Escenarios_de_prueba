@@ -13,20 +13,6 @@ When('I enter name {kraken-string}', async function (name) {
   return await element.setValue(name);
 });
 
-When('I enter email {kraken-string}', async function (email) {
-  let element = await this.driver.$('#email');
-  return await element.setValue(email);
-});
-
-When('I enter password {kraken-string}', async function (password) {
-  let element = await this.driver.$('#password');
-  return await element.setValue(password);
-});
-
-When('I click on register', async function () {
-  let element = await this.driver.$('#ember4');
-  return await element.click();
-})
 
 Then('I should see an error message {kraken-string}', async function (expectedError) {
   const errorMessageElement = await this.driver.$('div.form-group.error > p.response');
