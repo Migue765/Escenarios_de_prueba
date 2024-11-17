@@ -257,3 +257,10 @@ Then('la descripción del sitio debería ser {string}', async function (descript
     console.log(siteDescription);
     assert.equal(description, siteDescription);
 })
+
+Then('el nombre del sitio debería ser {string}', async function (description) {
+    const titleComponent = await this.driver.$('[data-testid="title-and-description"]')
+    const siteDescription = await titleComponent.$$('div.flex.items-center.mt-1')[0].getText()
+    console.log(siteDescription);
+    assert.equal(description, siteDescription);
+})
