@@ -16,5 +16,9 @@
     "TAG-2": "Tag example 2",
     "TAG-3": "Tag example 3",
     "TAG-COLOR": "FF5733",
-    "DESCRIPTION": "This is a description for the new tag. It is a very long description that will be used to test the functionality of the tag creation process. This is a description for the new tag. It is a very long description that will be used to test the functionality of the tag creation process. This is a description for the new tag. It is a very long description that will be used to test the functionality of the tag creation process."
+    "DESCRIPTION": "This is a description for the new tag. It is a very long description that will be used to test the functionality of the tag creation process. This is a description for the new tag. It is a very long description that will be used to test the functionality of the tag creation process. This is a description for the new tag. It is a very long description that will be used to test the functionality of the tag creation process.",
+    "URLPROFILE": "http://localhost:2368/ghost/#/settings/staff/natalia",
+    "NAMEUSER": "Natalia Arandio",
+    "MESSAGEERROR": "Enter a valid email address",
+    "WEBSITE": "ERROR WEBSITE"
 }
