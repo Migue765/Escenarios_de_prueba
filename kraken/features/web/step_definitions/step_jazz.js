@@ -84,50 +84,33 @@ When('navego a la página de configuración avanzada', async function () {
     await settingsButton.click();
 });
 
-// Paso para agregar una nueva integración personalizada
+
 When('agrego una nueva integración personalizada con el nombre {kraken-string}', async function (integrationName) {
-    // Esperar y hacer clic en el botón "Agregar integración".
     let addIntegrationButton = await this.driver.$('#admin-x-settings-scroller > div > div:nth-child(6) > div > div:nth-child(1) > div.flex.items-start.justify-between.gap-4 > div:nth-child(2) > button');
     await addIntegrationButton.waitForClickable({ timeout: 5000 });
     await addIntegrationButton.click();
 
-    // Esperar el campo de entrada para el nombre de integración.
     let integrationNameInput = await this.driver.$('input[placeholder="Custom integration"]');
     await integrationNameInput.waitForExist({ timeout: 5000 });
     await integrationNameInput.setValue(integrationName);
 
-    // Esperar y hacer clic en el botón "Guardar integración".
     let saveIntegrationButton = await this.driver.$('#modal-backdrop button.bg-black.text-white');
     await saveIntegrationButton.waitForClickable({ timeout: 5000 });
     await saveIntegrationButton.click();
 
-    // Esperar y hacer clic en el botón "Cerrar".
     let closeButton = await this.driver.$('/html/body/div[2]/div/main/div[1]/div/div/div[4]/section/div[2]/div[2]/div/div[2]/div/button[1]');
     await closeButton.waitForClickable({ timeout: 5000 });
     await closeButton.click();
 });
 
 Then('debería ver {kraken-string} en la lista de integraciones', async function (integrationName) {
-    const { expect } = await import('chai');
-
     const customButton = await this.driver.$('button[title="Custom"]');
     await customButton.click();
-
-    const integrationListContainer = await this.driver.$('div[data-state="active"][role="tabpanel"]');
-    await integrationListContainer.waitForExist({ timeout: 5000 });
-
-    const integrationDiv = await integrationListContainer.$('//*[@id="radix-:rp:-content-custom"]/div/section/div');
-    await integrationDiv.waitForExist({ timeout: 5000 });
-
-    const childElements = await integrationDiv.$$('*');
-
-    const childTexts = await Promise.all(
-        childElements.map(async (child) => await child.getText())
-    );
-
-    const containsExpectedText = childTexts.some((text) => text.includes(integrationName));
-
-    expect(containsExpectedText).to.be.true;
+    await this.driver.pause(3000)
+    const integrationListContainer = await this.driver.$('[data-testid="integrations"]');
+    const span = await integrationListContainer.$('.flex.flex-col').$('span').getText()
+    console.log(span)
+    assert.equal(span, integrationName)
 });
 
 
@@ -254,3 +237,30 @@ Then('valido cambios en newsletters', async function () {
     let status = await newsletterToggle.$('.flex.flex-col.gap-x-5.gap-y-7.undefined').$('span').getText()
     assert.equal(status, 'Enabled')
 });
+
+
+When('delete all custom integration', async function () {
+    const customButton = await this.driver.$('button[title="Custom"]');
+    await customButton.click();
+    await this.driver.pause(3000)
+    const integrationListContainer = await this.driver.$('[data-testid="integrations"]');
+    const button = await integrationListContainer.$('.flex.flex-col').$('button')
+    await button.click();
+    await this.driver.pause(500);
+    const modal = await this.driver.$('#modal-backdrop').$('button.bg-red')
+    await modal.click();
+});
+
+Then('la descripción del sitio debería ser {string}', async function (description) {
+    const titleComponent = await this.driver.$('[data-testid="title-and-description"]')
+    const siteDescription = await titleComponent.$$('div.flex.items-center.mt-1')[1].getText()
+    console.log(siteDescription);
+    assert.equal(description, siteDescription);
+})
+
+Then('el nombre del sitio debería ser {string}', async function (description) {
+    const titleComponent = await this.driver.$('[data-testid="title-and-description"]')
+    const siteDescription = await titleComponent.$$('div.flex.items-center.mt-1')[0].getText()
+    console.log(siteDescription);
+    assert.equal(description, siteDescription);
+})
