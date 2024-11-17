@@ -118,7 +118,7 @@ Then('debería ver {kraken-string} en la lista de integraciones', async function
     const integrationDiv = await integrationListContainer.$('//*[@id="radix-:rp:-content-custom"]/div/section/div');
     await integrationDiv.waitForExist({ timeout: 5000 });
 
-    const childElements = await integrationDiv.$$('*'); 
+    const childElements = await integrationDiv.$$('*');
 
     const childTexts = await Promise.all(
         childElements.map(async (child) => await child.getText())
@@ -168,24 +168,24 @@ When('elimino la integración {kraken-string} de la lista', async function (inte
         let text = await item.$('div.flex.grow.flex-col.py-3.pr-6 > span').getText();
 
         // Verifica si el nombre de la integración coincide con el parámetro recibido
-            // Simula el evento mouseover para hacer visible el botón de eliminar
-            await this.driver.execute((el) => {
-                const event = new MouseEvent('mouseover', {
-                    view: window,
-                    bubbles: true,
-                    cancelable: true
-                });
-                el.dispatchEvent(event);
-            }, item);
+        // Simula el evento mouseover para hacer visible el botón de eliminar
+        await this.driver.execute((el) => {
+            const event = new MouseEvent('mouseover', {
+                view: window,
+                bubbles: true,
+                cancelable: true
+            });
+            el.dispatchEvent(event);
+        }, item);
 
-            // Busca el botón de eliminar dentro del elemento de la integración y haz clic
-            const deleteButton = await item.$('button:contains("Delete")');
-            if (deleteButton) {
-                await deleteButton.click();
-            } else {
-                console.warn("No se encontró el botón de eliminar para la integración seleccionada.");
-            }
-            break;
+        // Busca el botón de eliminar dentro del elemento de la integración y haz clic
+        const deleteButton = await item.$('button:contains("Delete")');
+        if (deleteButton) {
+            await deleteButton.click();
+        } else {
+            console.warn("No se encontró el botón de eliminar para la integración seleccionada.");
+        }
+        break;
     }
 });
 
@@ -214,12 +214,12 @@ When('habilito la suscripción a newsletters', async function () {
 
     // Verifica que inicialmente no esté marcado
     const isCheckedBeforeClick = await newsletterToggle.getAttribute('aria-checked');
-    
+
     // Si no está habilitado, realiza el clic para habilitar la suscripción
     if (isCheckedBeforeClick !== 'true') {
         await newsletterToggle.click();
     }
-    
+
 });
 
 
@@ -236,32 +236,27 @@ When('edito newsletters my blog', async function () {
     await firstNewsletter.click();
 
     // Paso 2: Oprimir el botón en la ventana emergente
-    let designButton = await this.driver.$('#design');
+    let designButton = await this.driver.$('button#design');
+    console.log(designButton)
     await designButton.click();
 
-    // Paso 3: Verificar el estado inicial de los botones
-    let firstOptionButton = await this.driver.$('#\\:r2m\\:');
-    let secondOptionButton = await this.driver.$('#\\:r2p\\:');
-
-    const firstButtonState = await firstOptionButton.getAttribute('aria-checked');
-    const secondButtonState = await secondOptionButton.getAttribute('aria-checked');
-
-    // Oprimir solo si el botón está en "true"
-    if (firstButtonState === 'true') {
-        await firstOptionButton.click();
+    this.driver.pause(2000)
+    let buttons = await this.driver.$('div.group.flex.items-start.gap-2.dark\\:text-white.justify-between.undefined')
+    console.log(buttons.length)
+    for (let i = 0; i < buttons.length; i++) {
+        console.log("entre en el for")
+        console.log(buttons[i])
+        let button = buttons[i].$('button')
+        let atribute = await button.getAttribute('aria-checked');
+        if (atribute === 'true') {
+            await button.$('button').click();
+            await this.driver.pause(3000)
+        }
+        else {
+            console.log(atribute)
+            await this.driver.pause(3000)
+        }
     }
-    if (secondButtonState === 'true') {
-        await secondOptionButton.click();
-    }
-
-    // Paso 4: Confirmar cambios
-    let confirmButton = await this.driver.$(
-        '//*[@id="modal-backdrop"]/section/div/div/div[2]/div[1]/div/button[1]'
-    );
-    await confirmButton.click();
-
-    // Paso 5: Volver a dar clic en el elemento de la lista de newsletters
-    await firstNewsletter.click();
 });
 
 Then('valido cambios en newsletters', async function () {
