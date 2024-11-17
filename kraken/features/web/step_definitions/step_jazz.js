@@ -1,5 +1,6 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 
+const assert = require('assert');
 
 
 // Paso para navegar a la URL
@@ -237,42 +238,31 @@ When('edito newsletters my blog', async function () {
 
     // Paso 2: Oprimir el botón en la ventana emergente
     let designButton = await this.driver.$('button#design');
-    console.log(designButton)
     await designButton.click();
 
     this.driver.pause(2000)
-    let buttons = await this.driver.$('div.group.flex.items-start.gap-2.dark\\:text-white.justify-between.undefined')
+    let buttons = await this.driver.$$('div.group.flex.items-start.gap-2.dark\\:text-white.justify-between.undefined')
     console.log(buttons.length)
     for (let i = 0; i < buttons.length; i++) {
-        console.log("entre en el for")
-        console.log(buttons[i])
-        let button = buttons[i].$('button')
+        let button = await buttons[i].$('button')
         let atribute = await button.getAttribute('aria-checked');
         if (atribute === 'true') {
-            await button.$('button').click();
-            await this.driver.pause(3000)
+            await button.click();
+            await this.driver.pause(1000)
         }
         else {
             console.log(atribute)
-            await this.driver.pause(3000)
         }
     }
 });
 
 Then('valido cambios en newsletters', async function () {
-    // Localiza los botones
-    let firstOptionButton = await this.driver.$('#\\:r2m\\:');
-    let secondOptionButton = await this.driver.$('#\\:r2p\\:');
-
-    // Verifica el estado final de ambos botones
-    const firstButtonFinalState = await firstOptionButton.getAttribute('aria-checked');
-    const secondButtonFinalState = await secondOptionButton.getAttribute('aria-checked');
-
-    // Validar que ambos estén en "false"
-    if (firstButtonFinalState !== 'false') {
-        throw new Error('El primer botón no está en estado "false"');
-    }
-    if (secondButtonFinalState !== 'false') {
-        throw new Error('El segundo botón no está en estado "false"');
+    let buttons = await this.driver.$$('div.group.flex.items-start.gap-2.dark\\:text-white.justify-between.undefined')
+    buttons.shift();
+    console.log("inicio validacion de estado")
+    for (let i = 0; i < buttons.length; i++) {
+        let button = await buttons[i].$('button')
+        let atribute = await button.getAttribute('aria-checked');
+        assert.equal(atribute, 'false');
     }
 });
