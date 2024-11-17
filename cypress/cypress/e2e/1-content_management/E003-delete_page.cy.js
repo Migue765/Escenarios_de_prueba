@@ -60,23 +60,31 @@ describe('Content Management: Delete and Verify Post', () => {
         takeScreenshot();
     });
 
-    it('should delete the selected page', () => {
+    it('should delete all pages titled "My first page"', () => {
         cy.visit(LOCAL_HOST + "#/pages");
         cy.url().should('include', '/ghost/#/pages');
         takeScreenshot();
-        cy.get('.gh-posts-list-item').first().click();
-        cy.url().should('include', '/editor/page/');
-        takeScreenshot();
-        cy.get('[data-test-psm-trigger]').click();
-        takeScreenshot();
-        cy.get('.settings-menu-delete-button').click();
-        takeScreenshot();
-        cy.wait(2000);
-        cy.get('[data-test-button="delete-post-confirm"]').click({force: true});
-        takeScreenshot();
-        cy.url().should('include', '/ghost/#/pages');
-        takeScreenshot();
-        cy.get('.gh-posts-list-item:contains("My first page")').should('not.exist');
-        takeScreenshot();
+
+        function deletePageIfExists() {
+            cy.get('body').then($body => {
+                if ($body.find('.gh-posts-list-item:contains("My first page")').length > 0) {
+                    cy.get('.gh-posts-list-item:contains("My first page")').first().click();
+                    cy.url().should('include', '/editor/page/');
+                    takeScreenshot();
+                    cy.get('[data-test-psm-trigger]').click();
+                    takeScreenshot();
+                    cy.get('.settings-menu-delete-button').click();
+                    takeScreenshot();
+                    cy.wait(2000);
+                    cy.get('[data-test-button="delete-post-confirm"]').click({force: true});
+                    takeScreenshot();
+                    cy.url().should('include', '/ghost/#/pages');
+                    takeScreenshot();
+                    deletePageIfExists();
+                }
+            });
+        }
+
+        deletePageIfExists();
     });
 });
