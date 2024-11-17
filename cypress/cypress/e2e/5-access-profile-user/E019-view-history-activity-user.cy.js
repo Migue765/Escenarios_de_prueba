@@ -1,7 +1,7 @@
 describe('Access profile: View history activity user', () => {
 
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
-    const SCREENSHOT_PATH = '6-acces-profile-user/E024-view-history-activity/view-history-activity';
+    const SCREENSHOT_PATH = '5-access_profile_user/E019-view_history_activity_before/view_history_activity';
     let screenshotCounter = 1;
     const NAME = Cypress.env('NAME');
 
@@ -30,9 +30,9 @@ describe('Access profile: View history activity user', () => {
         cy.get('.dropdown-menu.dropdown-triangle-top').should('be.visible');
         cy.get('a[data-test-nav="user-profile"').click();
         takeScreenshot();
-        cy.get('button').contains('Actions').click({force: true}); 
+        cy.get('button').contains('Actions').click({force: true});
         takeScreenshot();
-        cy.get('button').contains('View user activity').click({force: true}); 
+        cy.get('button').contains('View user activity').click({force: true});
         cy.wait(2000);
         cy.get('h3').should('be.visible').and('contain.text', 'History');
         takeScreenshot();

@@ -1,7 +1,7 @@
 describe('Access profile: access menu profile ', () => {
 
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
-    const SCREENSHOT_PATH = '6-acces-profile-user/E021-access-user-profile-from-the-menu/acces-menu-profile';
+    const SCREENSHOT_PATH = '5-access_profile_user/E016-access_user_profile_from_the_menu_before/access_menu_profile';
     let screenshotCounter = 1;
 
     function takeScreenshot() {
@@ -19,7 +19,7 @@ describe('Access profile: access menu profile ', () => {
         return false;
     });
 
-    it('Acces menu profile', () => {
+    it('Access menu profile', () => {
 
         cy.visit(LOCAL_HOST + "#/dashboard");
         cy.wait(2000);
@@ -36,7 +36,4 @@ describe('Access profile: access menu profile ', () => {
 
     });
 
-
-
- 
 });

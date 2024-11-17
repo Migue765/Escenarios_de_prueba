@@ -1,7 +1,7 @@
 describe('Access profile: View error update website', () => {
 
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
-    const SCREENSHOT_PATH = '6-acces-profile-user/E024-view-history-activity/view-history-activity';
+    const SCREENSHOT_PATH = '5-access_profile_user/E020-view_history_activity_before/view_history_activity';
     let screenshotCounter = 1;
     const NAME = Cypress.env('NAME');
 
@@ -27,8 +27,8 @@ describe('Access profile: View error update website', () => {
         cy.get('div.gh-user-avatar.relative').click();
         cy.get('a[data-test-nav="user-profile"').click();
         cy.wait(2000);
-        cy.contains('label', 'Website').should('be.visible').parent().find('input').should('be.visible').type("error site"); 
-        cy.get('button').contains('Save').click({force: true}); 
+        cy.contains('label', 'Website').should('be.visible').parent().find('input').should('be.visible').type("error site");
+        cy.get('button').contains('Save').click({force: true});
 
     });
 });
