@@ -249,5 +249,11 @@ When('delete all custom integration', async function () {
     await this.driver.pause(500);
     const modal = await this.driver.$('#modal-backdrop').$('button.bg-red')
     await modal.click();
-    await this.driver.pause(4000)
+});
+
+Then('la descripción del sitio debería ser {string}', async function (description) {
+    const titleComponent = await this.driver.$('[data-testid="title-and-description"]')
+    const siteDescription = await titleComponent.$$('div.flex.items-center.mt-1')[1].getText()
+    console.log(siteDescription);
+    assert.equal(description, siteDescription);
 })
