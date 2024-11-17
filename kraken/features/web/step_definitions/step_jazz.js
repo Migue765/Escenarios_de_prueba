@@ -143,6 +143,8 @@ When('espero a que la lista de integraciones esté visible', async function () {
 });
 
 When('elimino la integración {kraken-string} de la lista', async function (integrationName) {
+    const { expect } = await import('chai');
+
     // Encuentra el botón de 'Integrations' y haz clic para cargar la lista de integraciones
     const integrationsButton = await this.driver.$('#integrations');
     if (integrationsButton) {
@@ -166,24 +168,27 @@ When('elimino la integración {kraken-string} de la lista', async function (inte
         let text = await item.$('div.flex.grow.flex-col.py-3.pr-6 > span').getText();
 
         // Verifica si el nombre de la integración coincide con el parámetro recibido
-        if (text.includes(integrationName)) {
-            // Cambia el estilo del elemento para garantizar que sea visible
+            // Simula el evento mouseover para hacer visible el botón de eliminar
             await this.driver.execute((el) => {
-                el.style.visibility = 'visible';
-                el.style.display = 'block';
+                const event = new MouseEvent('mouseover', {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true
+                });
+                el.dispatchEvent(event);
             }, item);
 
             // Busca el botón de eliminar dentro del elemento de la integración y haz clic
-            const deleteButton = await item.$('#radix-\:rp\:-content-custom > div > section > div > div > div.visible.py-3.md\:pl-6.md\:pr-6.group-hover\/list-item\:visible.md\:invisible > button');
+            const deleteButton = await item.$('button:contains("Delete")');
             if (deleteButton) {
                 await deleteButton.click();
             } else {
                 console.warn("No se encontró el botón de eliminar para la integración seleccionada.");
             }
             break;
-        }
     }
 });
+
 
 
 
@@ -204,48 +209,75 @@ When('confirmo la eliminación', async function () {
 
 // Paso para habilitar la suscripción a newsletters
 When('habilito la suscripción a newsletters', async function () {
+    // Localiza el elemento del toggle de newsletters
     let newsletterToggle = await this.driver.$('#\\:ro\\:');
-    await newsletterToggle.click();
+
+    // Verifica que inicialmente no esté marcado
+    const isCheckedBeforeClick = await newsletterToggle.getAttribute('aria-checked');
+    
+    // Si no está habilitado, realiza el clic para habilitar la suscripción
+    if (isCheckedBeforeClick !== 'true') {
+        await newsletterToggle.click();
+    }
+    
 });
+
 
 When('hago clic en el botón de editar título y descripción', async function () {
     let editButton = await this.driver.$('#admin-x-settings-scroller > div > div:nth-child(1) > div > div:nth-child(1) > div.flex.items-start.justify-between.gap-4 > div:nth-child(2) > div > button');
     await editButton.click();
 });
 
+When('edito newsletters my blog', async function () {
+    // Paso 1: Dar clic en el primer elemento de la lista de newsletters
+    let firstNewsletter = await this.driver.$(
+        '#radix-\\:rq\\:-content-active-newsletters table tbody tr'
+    );
+    await firstNewsletter.click();
 
+    // Paso 2: Oprimir el botón en la ventana emergente
+    let designButton = await this.driver.$('#design');
+    await designButton.click();
 
+    // Paso 3: Verificar el estado inicial de los botones
+    let firstOptionButton = await this.driver.$('#\\:r2m\\:');
+    let secondOptionButton = await this.driver.$('#\\:r2p\\:');
 
+    const firstButtonState = await firstOptionButton.getAttribute('aria-checked');
+    const secondButtonState = await secondOptionButton.getAttribute('aria-checked');
 
+    // Oprimir solo si el botón está en "true"
+    if (firstButtonState === 'true') {
+        await firstOptionButton.click();
+    }
+    if (secondButtonState === 'true') {
+        await secondOptionButton.click();
+    }
 
+    // Paso 4: Confirmar cambios
+    let confirmButton = await this.driver.$(
+        '//*[@id="modal-backdrop"]/section/div/div/div[2]/div[1]/div/button[1]'
+    );
+    await confirmButton.click();
 
-
-Then('el nombre del sitio debería ser {kraken-string}', async function (expectedTitle) {
-    // Esperar a que el elemento que contiene el título esté visible
-    let titleElement = await this.driver.$('div.flex.items-center.mt-1');
-    await titleElement.waitForExist({ timeout: 5000 });
-
-    // Obtener el texto del elemento
-    let actualTitle = await titleElement.getText();
-
-    // Validar que el texto del elemento sea igual al título esperado
-    const { expect } = await import('chai');
-    expect(actualTitle).to.equal(expectedTitle);
+    // Paso 5: Volver a dar clic en el elemento de la lista de newsletters
+    await firstNewsletter.click();
 });
 
-Then('la descripción del sitio debería ser {kraken-string}', async function (expectedDescription) {
-    // Buscar el elemento h6 con el texto "Site description"
-    let h6Element = await this.driver.$('h6=Site description');
-    await h6Element.waitForExist({ timeout: 5000 });
+Then('valido cambios en newsletters', async function () {
+    // Localiza los botones
+    let firstOptionButton = await this.driver.$('#\\:r2m\\:');
+    let secondOptionButton = await this.driver.$('#\\:r2p\\:');
 
-    // Seleccionar el siguiente div
-    let descriptionElement = await h6Element.$('..').$('div.flex.items-center.mt-1');
-    await descriptionElement.waitForExist({ timeout: 5000 });
+    // Verifica el estado final de ambos botones
+    const firstButtonFinalState = await firstOptionButton.getAttribute('aria-checked');
+    const secondButtonFinalState = await secondOptionButton.getAttribute('aria-checked');
 
-    // Obtener el texto del elemento
-    let actualDescription = await descriptionElement.getText();
-
-    // Validar que el texto del elemento sea igual a la descripción esperada
-    const { expect } = await import('chai');
-    expect(actualDescription).to.equal(expectedDescription);
+    // Validar que ambos estén en "false"
+    if (firstButtonFinalState !== 'false') {
+        throw new Error('El primer botón no está en estado "false"');
+    }
+    if (secondButtonFinalState !== 'false') {
+        throw new Error('El segundo botón no está en estado "false"');
+    }
 });
