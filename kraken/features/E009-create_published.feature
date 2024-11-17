@@ -6,7 +6,7 @@ Scenario: User 1 logs into Ghost
   And I wait for 1 seconds
   And I click new post
   And I wait for 1 seconds
-  And I enter title "hola mundo"
+  And I enter title "hola post"
   And I press Enter
   And I wait for 1 seconds
   And I enter body text "Esto es una prueba de contenido"
@@ -17,7 +17,10 @@ Scenario: User 1 logs into Ghost
   And I wait for 1 seconds
   And I click in confirm publish
   And I wait for 1 seconds
-  And I click in close
+  When I click in close
   And I wait for 1 seconds
-  Then I send a signal to user 1 containing "login1 complete"
+  Then I should be the page in the list with name "hola post"
   
+
+  ## Clean the test space
+  And I delete all pages
