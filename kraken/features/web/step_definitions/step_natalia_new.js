@@ -3,20 +3,13 @@ const assert = require('assert');
 
 
 When('I enter email {kraken-string}', async function (email) {
-    let element = await this.driver.$('#identification');
-    return await element.setValue(email);
+  let element = await this.driver.$('#identification');
+  return await element.setValue(email);
 });
 
 When('I enter password {kraken-string}', async function (password) {
-    let element = await this.driver.$('#password');
-    return await element.setValue(password);
-});
-
-When('I click sign in', async function () {
-  let element = await this.driver.$('span[data-test-task-button-state="idle"]');
-  await element.click();
-
-  loginCompleted = true;
+  let element = await this.driver.$('#password');
+  return await element.setValue(password);
 });
 
 When('I click on the profile section', async function () {
@@ -29,7 +22,7 @@ Then('I should see menu profile', async function () {
   await this.driver.waitUntil(async () => await menu.isDisplayed(), {
     timeout: 5000,
     timeoutMsg: 'El elemento menu no se muestra en la página'
-})
+  })
 });
 
 
@@ -50,7 +43,7 @@ Then('I should see user name as {kraken-string}', async function (expectedValue)
   await inputField.waitForDisplayed({ timeout: 5000 });
   const actualValue = await inputField.getValue();
   if (actualValue !== expectedValue) {
-      throw new Error(`El valor del campo es "${actualValue}", pero se esperaba "${expectedValue}".`);
+    throw new Error(`El valor del campo es "${actualValue}", pero se esperaba "${expectedValue}".`);
   }
   console.log(`El valor del campo es correcto: ${actualValue}`);
 });
@@ -95,8 +88,8 @@ Then('I should see error email {kraken-string}', async function (errorMessage) {
 Then('I should see the title History', async function () {
   const titleElement = await this.driver.$('h3');
   await this.driver.waitUntil(async () => await titleElement.isDisplayed(), {
-      timeout: 5000,
-      timeoutMsg: 'El elemento h3 no se muestra en la página'
+    timeout: 5000,
+    timeoutMsg: 'El elemento h3 no se muestra en la página'
   });
 
   const actualTitle = await titleElement.getText();
