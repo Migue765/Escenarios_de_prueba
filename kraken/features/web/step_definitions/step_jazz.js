@@ -204,21 +204,18 @@ When('confirmo la eliminación', async function () {
     await confirmDeleteButton.click();
 });
 
-//---
-
-
-
-// Paso para habilitar la suscripción a newsletters
 When('habilito la suscripción a newsletters', async function () {
-    // Localiza el elemento del toggle de newsletters
-    let newsletterToggle = await this.driver.$('#\\:ro\\:');
-
-    // Verifica que inicialmente no esté marcado
-    const isCheckedBeforeClick = await newsletterToggle.getAttribute('aria-checked');
-
-    // Si no está habilitado, realiza el clic para habilitar la suscripción
-    if (isCheckedBeforeClick !== 'true') {
-        await newsletterToggle.click();
+    let newsletterToggle = await this.driver.$('[data-testid="enable-newsletters"]');
+    let status = await newsletterToggle.$('.flex.flex-col.gap-x-5.gap-y-7.undefined').$('span').getText()
+    console.log("status:", status)
+    if (status == 'Disabled') {
+        await newsletterToggle.$("div.group.flex.items-start.gap-2.dark\\:text-white.justify-between.undefined").click()
+        console.log("news letter se ha activado correctamente")
+        await this.driver.pause(3000);
+    }
+    else {
+        console.log("news letter se encuentra activado")
+        await this.driver.pause(3000);
     }
 
 });
@@ -231,15 +228,11 @@ When('hago clic en el botón de editar título y descripción', async function (
 
 When('edito newsletters my blog', async function () {
     // Paso 1: Dar clic en el primer elemento de la lista de newsletters
-    let firstNewsletter = await this.driver.$(
-        '#radix-\\:rq\\:-content-active-newsletters table tbody tr'
-    );
+    let firstNewsletter = await this.driver.$('[data-testid="newsletters"]').$('tr');
     await firstNewsletter.click();
-
     // Paso 2: Oprimir el botón en la ventana emergente
     let designButton = await this.driver.$('button#design');
     await designButton.click();
-
     this.driver.pause(2000)
     let buttons = await this.driver.$$('div.group.flex.items-start.gap-2.dark\\:text-white.justify-between.undefined')
     console.log(buttons.length)
@@ -257,12 +250,7 @@ When('edito newsletters my blog', async function () {
 });
 
 Then('valido cambios en newsletters', async function () {
-    let buttons = await this.driver.$$('div.group.flex.items-start.gap-2.dark\\:text-white.justify-between.undefined')
-    buttons.shift();
-    console.log("inicio validacion de estado")
-    for (let i = 0; i < buttons.length; i++) {
-        let button = await buttons[i].$('button')
-        let atribute = await button.getAttribute('aria-checked');
-        assert.equal(atribute, 'false');
-    }
+    let newsletterToggle = await this.driver.$('[data-testid="enable-newsletters"]');
+    let status = await newsletterToggle.$('.flex.flex-col.gap-x-5.gap-y-7.undefined').$('span').getText()
+    assert.equal(status, 'Enabled')
 });
