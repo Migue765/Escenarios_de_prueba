@@ -21,19 +21,17 @@ describe('Manage tags and sections', () => {
     it('Create a new tag and verify it', () => {
 
         cy.visit(LOCAL_HOST + "#/dashboard");
-        cy.wait(4000);
+        cy.wait(3000);
         takeScreenshot();
         cy.get('a[data-test-nav="tags"]').click();
-        cy.wait(2000);
+        cy.wait(1000);
         takeScreenshot();
         cy.get('a[href="#/tags/new/"].gh-btn.gh-btn-primary').click();
         cy.wait(1000);
         takeScreenshot();
         cy.get('input[data-test-input="tag-name"]').type(NAME_TAG_1);
-        cy.wait(1000);
         takeScreenshot();
         cy.get('input[data-test-input="accentColor"]').type(TAG_COLOR);
-        cy.wait(1000);
         takeScreenshot();
         cy.get('textarea[data-test-input="tag-description"]').type(DESCRIPTION);
         cy.wait(1000);
@@ -49,10 +47,8 @@ describe('Manage tags and sections', () => {
         cy.wait(1000);
         takeScreenshot();
         cy.get('input[data-test-input="tag-name"]').type(NAME_TAG_2);
-        cy.wait(1000);
         takeScreenshot();
         cy.get('input[data-test-input="accentColor"]').type(TAG_COLOR);
-        cy.wait(1000);
         takeScreenshot();
         cy.get('textarea[data-test-input="tag-description"]').type(DESCRIPTION);
         cy.wait(1000);

@@ -12,6 +12,7 @@ describe('Edit an existing tag and save the changes', () => {
 
     beforeEach("Precondition: Admin login", () => {
         cy.LoginGhost();
+        cy.createTags();
     });
 
     it('Edit an existing tag and save the changes', () => {
