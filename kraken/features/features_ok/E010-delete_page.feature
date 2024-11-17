@@ -39,10 +39,10 @@ Scenario: User 1 logs into Ghost
   And I wait for 1 seconds
   And I click in delete page
   And I wait for 1 seconds
-  And I click in confirm delete page
-  And I wait for 1 seconds
+  When I click in confirm delete page
   Then I should dont be the page in the list with name "hola mundo delete"
 
   ## Clean the test
+  And I wait for 2 seconds
   And I delete all pages
   

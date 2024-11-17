@@ -16,11 +16,11 @@ Scenario: User 1 logs into Ghost
   And I click in continue final review
   And I wait for 1 seconds
   And I click in confirm publish
-  And I wait for 1 seconds
+  And I wait for 3 seconds
   When I click in close
-  And I wait for 1 seconds
   Then I should be the page in the list with name "hola post"
   
 
   ## Clean the test space
+  And I wait for 2 seconds
   And I delete all pages

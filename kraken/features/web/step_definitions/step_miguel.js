@@ -180,6 +180,7 @@ Then('I delete all pages', async function () {
     for (let i = 0; i < pageItems.length; i++) {
         let pageItem = pageItems[i];
         await pageItem.click();
+        await this.driver.pause(1000);
         let settingsButton = await this.driver.$('.settings-menu-toggle');
         await settingsButton.click();
         let deleteButton = await this.driver.$('.settings-menu-delete-button');
@@ -200,3 +201,27 @@ Then('I should dont be the page in the list with name {string}', async function 
         assert.notEqual(pageTitle, title)
     }
 });
+
+//Members validation
+Then('I should be the member in the list with name {string}', async function (name) {
+    const member = await this.driver.$('table.gh-list').$('[data-test-list="members-list-item"]').$('h3')
+    const mamberName = await member.getText();
+    console.log(mamberName)
+    assert.equal(mamberName, name)
+});
+
+
+Then('I delete all members', async function () {
+    const members = await this.driver.$('table.gh-list').$$('[data-test-list="members-list-item"]')
+    for (let i = 0; i < members.length; i++) {
+        let member = members[i];
+        await member.click();
+        await this.driver.pause(1000);
+        let settingsButton = await this.driver.$('[data-test-button="member-actions"]');
+        await settingsButton.click();
+        let deleteButton = await this.driver.$('[data-test-button="delete-member"]');
+        await deleteButton.click();
+        let confirmDeleteButton = await this.driver.$('[data-test-button="confirm"]');
+        await confirmDeleteButton.click();
+    }
+})

@@ -20,5 +20,6 @@ Scenario: User 1 logs into Ghost
   Then I should be the page in the list with name "hola mundo"
 
   ## Clean the test space
+  And I wait for 2 seconds
   And I delete all pages
   
