@@ -1,7 +1,7 @@
 describe('Access profile: view date user profile ', () => {
 
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
-    const SCREENSHOT_PATH = '../screenshots (ghost_ 4.5)/E002-view_date_user_profile_before/view_date_user_profile';
+    const SCREENSHOT_PATH = '../screenshots (ghost_4.5)/E002-view_date_user_profile_before/view_date_user_profile';
     let screenshotCounter = 1;
     const NAME = Cypress.env('NAME');
 
