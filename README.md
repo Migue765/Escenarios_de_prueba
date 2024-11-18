@@ -217,22 +217,17 @@ En este proyecto se definieron 20 escenarios de prueba para evaluar cinco funcio
 
 
 
-## Kraken 🐙
--- Desde terminal ira a la ruta donde tenemos instalado ghost local y ejecutar ghost stop
--- Ir a la carpeta donde se encuentra la base local y eliminarla ...ghost\content\data --ghost-local
--- Desde la terminal nos situamos donde tenemos la carpeta de kraken 
--- Antes de ejecutar primero ir a carpeta Kraken\FeatureFuncionalidades y tomar el archivo register 
--- Reemplazar el archivo por el que se encuentre en la ruta ..Kraken\features 
--- Volvemos desde la terminal  y  ejecutamos  npx kraken-node run
--- Ahora vamos a  ...Kraken\FeatureFuncionalidades y tomar el archivo login 
--- Reemplazar el archivo por el que se encuentre en la ruta ..Kraken\features 
--- Volvemos desde la terminal y ejecutamos  npx kraken-node run
-
-Nota: Tener en cuenta que para que funcionen las pruebas debe existir solo un archivo .FEATURE en la carpeta features y 
-se deben ejecutar en el orden indicado primero register y luego login
-
-
-Aquí tienes un instructivo mejorado y más estructurado para instalar y ejecutar Cypress en un proyecto específico en macOS:
+## Kraken V5.1.0 🐙
+-- Se debe ir a la carpeta kraken, aquí se usara el comando
+*  nvm install 18.0.0
+Una vez instalado usaremos el comando
+*  nvm user 18.0.0
+Ya finalizado este proceso usaremos el comando
+*  npm i
+Luego correremos el aplicativo ghost y dentro del archivo properties.json que se encuentra dentro de la carpeta kraken, verificaremos que la variable URL coincida con la url donde se encuentra ejecutado GHOST
+-- Una vez validemos esto estamos listos para comenzar a correr las pruebas
+-- Los escenarios de prueba se encuentran en la carpeta features_wait. Uno por uno se pasara los archivos a la carpeta genral "features" y se ejecutara el comando ./node_modules/kraken-node/bin/kraken-node run
+-- Nota: Se pueden pasar todos los escenarios a la carpeta global y ejecutar de una vez, pero en computadoras windows pueden generar conflicto por esto no lo recomendamos.
 
 
 

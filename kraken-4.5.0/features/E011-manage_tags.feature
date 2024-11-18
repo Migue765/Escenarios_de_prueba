@@ -12,7 +12,6 @@ Feature: Manage tags and sections
     When I click on the Tags section
     Then validate creation tag witn name "<NAME-TAG>"
 
-
     ## clean spacework for test
     And I click on the Tags section
     And delete all tags
