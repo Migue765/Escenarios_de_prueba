@@ -1,4 +1,5 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
+const assert = require('assert');
 
 let loginCompleted = false;
 
@@ -129,9 +130,34 @@ Given(/^I click on the Posts section$/, async function () {
     await element.click();
     await this.driver.pause(2000);
 });
-Then('I should see the tags {kraken-string}, {kraken-string}, and {kraken-string} associated with the post', async function (tag1, tag2, tag3) {
+Then('I should see the tags {kraken-string}, {kraken-string} associated with the post', async function (tag1, tag2) {
     let elements = await this.driver.$$('div[data-test-token-input="true"] .ember-power-select-multiple-inner-text');
     let tags = await Promise.all(elements.map(async (element) => {
         return await element.getText();
     }));
 });
+
+Then('validate creation tag witn name {kraken-string}', async function (nameTag) {
+    const tag = await this.driver.$('ol.tags-list').$$('li.gh-list-row.gh-tags-list-item')[0]
+    let tagTitle = await tag.$('.gh-tag-list-name').getText()
+    assert.equal(tagTitle, nameTag)
+})
+
+When('delete all tags', async function () {
+    const tags = await this.driver.$('ol.tags-list.gh-list').$$('li.gh-list-row.gh-tags-list-item')
+    console.log(tags.length)
+    for (let i = 0; i < tags.length; i++) {
+        let tag = tags[i]
+        await tag.click()
+        await this.driver.pause(1000)
+        await this.driver.$('[data-test-button="delete-tag"]').click()
+        await this.driver.pause(1000)
+        await this.driver.$('[data-test-button="confirm"]').click()
+    }
+})
+
+Then('validate tag in filter {kraken-string}', async function (tagName) {
+    const filter = await this.driver.$$('span.ember-power-select-selected-item')[3].getText()
+    console.log(filter)
+    assert.equal(tagName, filter)
+})
