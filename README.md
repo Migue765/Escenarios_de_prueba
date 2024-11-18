@@ -240,7 +240,7 @@ Aquí tienes un instructivo mejorado y más estructurado para instalar y ejecuta
 
 ### 1. Configura NVM
 
-#### Ejecuta los siguientes comandos en tu terminal para configurar NVM correctamente:
+#### Ejecuta los siguientes comandos en tu terminal para configurar NVM correctamente (Solo MacOS):
 
 ```bash
 export NVM_DIR="$HOME/.nvm"
