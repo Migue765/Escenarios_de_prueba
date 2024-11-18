@@ -224,11 +224,22 @@ Una vez instalado usaremos el comando
 *  nvm user 18.0.0
 Ya finalizado este proceso usaremos el comando
 *  npm i
-Luego correremos el aplicativo ghost y dentro del archivo properties.json que se encuentra dentro de la carpeta kraken, verificaremos que la variable URL coincida con la url donde se encuentra ejecutado GHOST
+Luego correremos el aplicativo ghost en su version 4.5.0 y dentro del archivo properties.json que se encuentra dentro de la carpeta kraken, verificaremos que la variable URL coincida con la url donde se encuentra ejecutado GHOST
 -- Una vez validemos esto estamos listos para comenzar a correr las pruebas
 -- Los escenarios de prueba se encuentran en la carpeta features_wait. Uno por uno se pasara los archivos a la carpeta genral "features" y se ejecutara el comando ./node_modules/kraken-node/bin/kraken-node run
 -- Nota: Se pueden pasar todos los escenarios a la carpeta global y ejecutar de una vez, pero en computadoras windows pueden generar conflicto por esto no lo recomendamos.
 
+## Kraken V4.5.0 🐙
+-- Se debe ir a la carpeta kraken-4.5.0, aquí se usara el comando
+*  nvm install 12.22.1
+Una vez instalado usaremos el comando
+*  nvm user 12.22.1
+Ya finalizado este proceso usaremos el comando
+*  npm i
+Luego correremos el aplicativo ghost en su version 4.5.0 y dentro del archivo properties.json que se encuentra dentro de la carpeta kraken, verificaremos que la variable URL coincida con la url donde se encuentra ejecutado GHOST
+-- Una vez validemos esto estamos listos para comenzar a correr las pruebas
+-- Los escenarios de prueba se encuentran en la carpeta features_wait. Uno por uno se pasara los archivos a la carpeta genral "features" y se ejecutara el comando ./node_modules/kraken-node/bin/kraken-node run
+-- Nota: Se pueden pasar todos los escenarios a la carpeta global y ejecutar de una vez, pero en computadoras windows pueden generar conflicto por esto no lo recomendamos.
 
 
 ## Cypress 🙂‍↕️
