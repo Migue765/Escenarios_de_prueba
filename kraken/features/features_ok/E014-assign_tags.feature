@@ -44,5 +44,13 @@ Feature: Manage tags and sections
     And I enter the tag "<TAG-1>"
     And I enter the tag "<TAG-2>"
     Then I should see the tags "<TAG-1>", "<TAG-2>" associated with the post
-    And I click on the Posts button
-    And I wait for 4 seconds
+
+
+
+    ## Clean the test space
+    And I navigate to page "<URL>"
+    And I click on the Tags section
+    And delete all tags
+    And I click in button published
+    And I wait for 2 seconds
+    And I delete all pages

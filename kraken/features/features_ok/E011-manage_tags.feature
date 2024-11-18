@@ -14,4 +14,5 @@ Feature: Manage tags and sections
 
 
     ## clean spacework for test
+    And I click on the Tags section
     And delete all tags
