@@ -60,7 +60,7 @@ Given('I click on the Published section', async function () {
     await this.driver.pause(2000);
 });
 Given('I click on the Coming Soon published item', async function () {
-    let element = await this.driver.$('a[href="#/editor/post/6731029cf870feddc91b36c0/"]');
+    let element = await this.driver.$('div.gh-posts-list-item-group');
     await element.click();
     await this.driver.pause(2000);
 });
