@@ -5,7 +5,7 @@ const PROPERTIES = require('../../../properties.json')
 Before(async function () {
   this.deviceClient = new WebClient('edge', {}, this.userId);
   this.driver = await this.deviceClient.startKrakenForUserId(this.userId);
-  await this.driver.url('http://localhost:2369/ghost/');
+  await this.driver.url(PROPERTIES.URL);
   var url = await this.driver.getUrl()
   if (url.includes('setup')) {
     await this.driver.$('#blog-title').setValue(PROPERTIES.TITLE);
