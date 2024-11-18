@@ -1,7 +1,7 @@
 describe('Filter posts by tag', () => {
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
     const NAME_TAG_2 = Cypress.env('NAME_TAG_2');
-    const SCREENSHOT_PATH = 'E013-filter_posts_before/filter_posts';
+    const SCREENSHOT_PATH = '4-post_management/E013-filter_posts_before/filter_posts';
     let screenshotCounter = 1;
 
     function takeScreenshot() {

@@ -6,7 +6,7 @@ describe('Manage tags and sections', () => {
     const NAME_TAG_2 = Cypress.env('NAME_TAG_2');
     const TAG_COLOR = Cypress.env('TAG_COLOR');
     const DESCRIPTION = Cypress.env('DESCRIPTION');
-    const SCREENSHOT_PATH = 'E011-manage_tags_before/manage_tags';
+    const SCREENSHOT_PATH = '4-tag_management/E011-manage_tags_before/manage_tags';
     let screenshotCounter = 1;
 
     function takeScreenshot() {

@@ -2,7 +2,7 @@ describe('Edit an existing tag and save the changes', () => {
 
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
     const NEW_NAME_TAG = Cypress.env('NEW_NAME_TAG');
-    const SCREENSHOT_PATH = 'E012-edit_tag_before/edit_tag';
+    const SCREENSHOT_PATH = '4-tag_management/E012-edit_tag_before/edit_tag';
     let screenshotCounter = 1;
 
     function takeScreenshot() {

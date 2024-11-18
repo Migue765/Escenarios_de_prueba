@@ -1,6 +1,6 @@
 describe('Delete a tag and verify it is not in the tag list', () => {
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
-    const SCREENSHOT_PATH = 'E015-delete_tag_before/delete_tag';
+    const SCREENSHOT_PATH = '4-tag_management/E015-delete_tag_before/delete_tag';
     let screenshotCounter = 1;
 
     function takeScreenshot() {

@@ -2,7 +2,7 @@ describe('Assign multiple tags to a post and verify they are saved correctly', (
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
     const NAME_TAG_1 = Cypress.env('NAME_TAG_1');
     const NAME_TAG_2 = Cypress.env('NAME_TAG_2');
-    const SCREENSHOT_PATH = 'E014-assign_tags_before/assign_tags';
+    const SCREENSHOT_PATH = '4-tag_management/E014-assign_tags_before/assign_tags';
     let screenshotCounter = 1;
 
     function takeScreenshot() {
