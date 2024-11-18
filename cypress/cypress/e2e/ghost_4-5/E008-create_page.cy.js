@@ -1,7 +1,7 @@
-describe('Content Management: Create and Verify Post', () => {
+describe('Content Management: Create and Verify Page', () => {
 
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
-    const SCREENSHOT_PATH = '1-content_management/E002-create_published_before/create_published';
+    const SCREENSHOT_PATH = '../screenshots (ghost_4.5)/E008-create_page_before/create_page';
     let screenshotCounter = 1;
 
     function takeScreenshot() {
@@ -19,21 +19,21 @@ describe('Content Management: Create and Verify Post', () => {
         return false;
     });
 
-    it('Create a new post and verify it appears in the list of posts', () => {
+    it('Create a new page and verify it appears in the list of pages', () => {
 
         cy.visit(LOCAL_HOST + "#/dashboard");
         cy.wait(4000);
         takeScreenshot();
 
         // Enter the pages section
-        cy.get('[data-test-nav-custom="posts-Published"]').click();
-        cy.url().should('include', '/ghost/#/posts');
+        cy.get('[data-test-nav="pages"]').click();
+        cy.url().should('include', '/ghost/#/pages');
         takeScreenshot();
 
         // Create a new page
-        cy.get('[data-test-new-post-button]').click();
+        cy.get('[data-test-new-page-button]').click();
         cy.wait(2000);
-        cy.url().should('include', '/ghost/#/editor/post');
+        cy.url().should('include', '/ghost/#/editor/page');
         takeScreenshot();
 
         // Wait for the editor to be visible
@@ -56,7 +56,7 @@ describe('Content Management: Create and Verify Post', () => {
         takeScreenshot();
 
         // Verify that the page has been published
-        cy.url().should('include', '/ghost/#/posts');
+        cy.url().should('include', '/ghost/#/pages');
         takeScreenshot();
     });
 });

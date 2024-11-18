@@ -1,7 +1,7 @@
 describe('Modify Site Name', () => {
 
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
-    const SCREENSHOT_PATH = '2-settings_management/E004-settings_management_before/modify_site_name';
+    const SCREENSHOT_PATH = '../screenshots (ghost_4.5)/E016-modify_site_name_before/modify_site_name';
     let screenshotCounter = 1;
 
     function takeScreenshot() {

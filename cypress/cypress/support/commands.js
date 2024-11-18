@@ -25,6 +25,34 @@ Cypress.Commands.add('LoginGhost', () => {
     });
 });
 
+Cypress.Commands.add('LoginGhost4', () => {
+    cy.session("Login", () => {
+        cy.visit(Cypress.env('LOCAL_HOST'));
+        cy.wait(2000);
+
+        cy.url().then((url) => {
+            if (url.includes('/setup')) {
+                // Fill out the user creation form
+                cy.get('span').contains('Create your account →').click();
+                cy.get('input#blog-title').type('My Blog');
+                cy.get('#name').type(Cypress.env('NAME'));
+                cy.get('#email').type(Cypress.env('EMAIL'));
+                cy.get('#password').type(Cypress.env('PASSWORD'));
+                cy.get('span').contains('Last step: Invite staff users →').click();
+                cy.wait(1000);
+                cy.get('.gh-flow-skip').click();
+            } else {
+                // Log in with the existing user
+                cy.visit(Cypress.env('LOCAL_HOST') + '#/signin');
+                cy.get('input[name="identification"]').type(Cypress.env('EMAIL'));
+                cy.get('input[name="password"]').type(Cypress.env('PASSWORD'));
+                cy.get('span').contains('Sign in →').click();
+            }
+        });
+        cy.url().should('include', '/ghost/#/dashboard');
+    });
+});
+
 Cypress.Commands.add('createTags', () => {
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
     const NAME_TAG_1 = Cypress.env('NAME_TAG_1');

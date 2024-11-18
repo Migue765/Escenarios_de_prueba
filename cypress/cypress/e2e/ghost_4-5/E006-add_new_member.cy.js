@@ -1,7 +1,7 @@
 describe('Member Management: Add and Verify Member', () => {
 
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
-    const SCREENSHOT_PATH = '3-member_management/E009-create_member_before/create_member';
+    const SCREENSHOT_PATH = '../screenshots (ghost_4.5)/E006-add_new_member_before/create_member';
     let screenshotCounter = 1;
 
     function takeScreenshot() {
@@ -10,7 +10,7 @@ describe('Member Management: Add and Verify Member', () => {
     }
 
     beforeEach("Precondition: Admin login", () => {
-        cy.LoginGhost();
+        cy.LoginGhost4();
     });
 
     // Handle uncaught exceptions

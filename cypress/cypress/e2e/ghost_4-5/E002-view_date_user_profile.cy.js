@@ -1,8 +1,9 @@
-describe('Access profile: access menu profile ', () => {
+describe('Access profile: view date user profile ', () => {
 
     const LOCAL_HOST = Cypress.env('LOCAL_HOST');
-    const SCREENSHOT_PATH = '5-access_profile_user/E016-access_user_profile_from_the_menu_before/access_menu_profile';
+    const SCREENSHOT_PATH = '../screenshots (ghost_ 4.5)/E002-view_date_user_profile_before/view_date_user_profile';
     let screenshotCounter = 1;
+    const NAME = Cypress.env('NAME');
 
     function takeScreenshot() {
         cy.screenshot(`${SCREENSHOT_PATH}_${screenshotCounter}`);
@@ -10,7 +11,7 @@ describe('Access profile: access menu profile ', () => {
     }
 
     beforeEach("Precondition: Admin login", () => {
-        cy.LoginGhost();
+        cy.LoginGhost4();
     });
 
     // Handle uncaught exceptions
@@ -19,7 +20,7 @@ describe('Access profile: access menu profile ', () => {
         return false;
     });
 
-    it('Access menu profile', () => {
+    it('View date user', () => {
 
         cy.visit(LOCAL_HOST + "#/dashboard");
         cy.wait(2000);
@@ -29,11 +30,12 @@ describe('Access profile: access menu profile ', () => {
         cy.get('div.gh-user-avatar.relative').click();
         takeScreenshot();
         cy.get('.dropdown-menu.dropdown-triangle-top').should('be.visible');
-        cy.get('a[data-test-nav="user-profile"').click();
+        cy.get('a[href="#/staff/jaime-larson/"]').click();
         takeScreenshot();
-        cy.url().should('include', '/ghost/#/settings/staff/jaime');
+        cy.get('header.gh-canvas-header-content h2.gh-canvas-title').contains('Jaime Larson').should('exist');
         takeScreenshot();
 
     });
+
 
 });
