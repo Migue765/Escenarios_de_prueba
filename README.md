@@ -119,10 +119,103 @@ En este proyecto se definieron 20 escenarios de prueba para evaluar cinco funcio
 
 ## Instalación
 
-Para utilizar las herramientas de este proyecto, asegúrate de tener instaladas las siguientes herramientas:
 
-1. **Node.js**: Se recomienda usar la versión v12.22.12. Puedes descargarlo desde [nodejs.org](https://nodejs.org/).
-2. **Ghost-admin**: El cual se puede instalar y ejecutar siguiendo la siguiente [guia](https://thesoftwaredesignlab.github.io/AutTestingCodelabs/ghost-local-deployment/index.html#1), propuesta en clase.
+### Ghost
+
+<details>
+<summary>Instalación de Ghost 5.1</summary>
+
+
+1. **Crea un directorio para tu instalación de Ghost**:
+
+   Abre tu terminal y ejecuta:
+
+   ```bash
+   mkdir ~/ghost_5.1
+   cd ~/ghost_5.1
+   ```
+
+2. **Instala Ghost CLI**:
+
+   Ejecuta el siguiente comando:
+
+   ```bash
+   npm install -g ghost-cli
+   ```
+
+3. **Instala Ghost en la versión específica**:
+
+   Ejecuta el siguiente comando para instalar Ghost 5.1 en tu carpeta:
+
+   ```bash
+   ghost install local 5.1.0
+   ```
+
+4. **Configura y ejecuta Ghost**:
+
+   Una vez finalizada la instalación, inicia Ghost con:
+
+   ```bash
+   ghost start
+   ```
+
+5. **Accede al panel de administración**:
+
+   Visita `http://localhost:2368/ghost` para acceder a la interfaz de administración y crear tu usuario.
+
+6. **Detener y reiniciar Ghost**:
+
+   Usa `ghost stop` para detener Ghost y `ghost start` para reiniciarlo cuando sea necesario.
+
+</details>
+
+<details>
+<summary>Instalación de Ghost 4.5</summary>
+
+1. **Crea un directorio para tu instalación de Ghost**:
+
+   Abre tu terminal y ejecuta:
+
+   ```bash
+   mkdir ~/ghost_4.5
+   cd ~/ghost_4.5
+   ```
+
+2. **Instala Ghost CLI**:
+
+   Ejecuta el siguiente comando:
+
+   ```bash
+   npm install -g ghost-cli@1.15.0
+   ```
+
+3. **Instala Ghost en la versión específica**:
+
+   Ejecuta el siguiente comando para instalar Ghost 4.5 en tu carpeta:
+
+   ```bash
+   ghost install local 4.5.1
+   ```
+
+4. **Configura y ejecuta Ghost**:
+
+   Una vez finalizada la instalación, inicia Ghost con:
+
+   ```bash
+   ghost start
+   ```
+
+5. **Accede al panel de administración**:
+
+   Visita `http://localhost:2368/ghost` para acceder a la interfaz de administración y crear tu usuario.
+
+6. **Detener y reiniciar Ghost**:
+
+   Usa `ghost stop` para detener Ghost y `ghost start` para reiniciarlo cuando sea necesario.
+
+</details>
+
+
 
 ## Kraken 🐙
 -- Desde terminal ira a la ruta donde tenemos instalado ghost local y ejecutar ghost stop
@@ -139,12 +232,69 @@ Nota: Tener en cuenta que para que funcionen las pruebas debe existir solo un ar
 se deben ejecutar en el orden indicado primero register y luego login
 
 
+Aquí tienes un instructivo mejorado y más estructurado para instalar y ejecutar Cypress en un proyecto específico en macOS:
+
+
+
 ## Cypress
 
-NOTA: Se recomienda al igual que los pasos iniciales de Kraken reiniciar el ghost para ver correctamente el Registro
--- Desde la terminal vamos a la carpeta de Cypress
--- En la terminal ejecutamos npx cypress open
--- Nos abira la interfaz y vamos a E2E Testing	
--- Seleccionamos el navegador de preferencia y damos star E2E
--- Damos click  register 
--- Seleccionamos en el menu speacs  login
+### 1. Configura NVM
+
+#### Ejecuta los siguientes comandos en tu terminal para configurar NVM correctamente:
+
+```bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # Carga nvm
+```
+
+### 2. Instala y Usa Node.js
+
+#### Se recomienda usar Node.js versión 12.10.0. Ejecuta estos comandos:
+
+```bash
+nvm install 12.10.0    # Instala Node.js 12.10.0
+nvm use 12.10.0        # Usa la versión instalada
+node -v                # Verifica que la versión de Node.js sea correcta
+```
+
+### 3. Navega a la Carpeta del Proyecto
+
+#### Accede a la carpeta donde está el proyecto:
+
+```bash
+cd /cypress
+```
+
+### 4. Instala Dependencias del Proyecto
+
+#### Instala la paquetería de Node.js necesaria para el proyecto:
+
+```bash
+npm install
+```
+
+### 5. Instala Cypress Localmente
+
+#### Instala Cypress como una dependencia de desarrollo:
+
+```bash
+npm install cypress --save-dev
+```
+
+### 6. Abre la Interfaz Gráfica de Cypress
+
+#### Para ejecutar Cypress y abrir la interfaz gráfica, utiliza el siguiente comando:
+
+```bash
+npx cypress open
+```
+
+### 7. Selecciona la Opción de Pruebas E2E
+
+#### Una vez que la interfaz de Cypress esté abierta:
+
+- Elige la opción **E2E Testing**.
+- Selecciona el navegador de tu preferencia para ejecutar las pruebas.
+- Ejecuta las pruebas según las carpetas provistas
+
+
