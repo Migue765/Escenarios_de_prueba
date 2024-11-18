@@ -230,7 +230,7 @@ Ya finalizado este proceso usaremos el comando
 ```bash 
 npm install
 ```
-Luego correremos el aplicativo ghost en su *version 5.1.0* y dentro del archivo properties.json que se encuentra dentro de la carpeta kraken, verificaremos que la variable URL coincida con la url donde se encuentra ejecutado GHOST
+Luego correremos el aplicativo ghost en su *version 5.1.0* y dentro del archivo properties.json que se encuentra dentro de la carpeta *kraken*, verificaremos que la variable URL coincida con la url donde se encuentra ejecutado GHOST
 * Una vez validemos esto estamos listos para comenzar a correr las pruebas
 * Los escenarios de prueba se encuentran en la carpeta features_wait. Uno por uno se pasara los archivos a la carpeta genral "features" y se ejecutara el comando 
 ./node_modules/kraken-node/bin/kraken-node run
@@ -249,7 +249,7 @@ Ya finalizado este proceso usaremos el comando
 ```bash 
 npm install
 ```
-Luego correremos el aplicativo ghost en su *version 4.5.0* y dentro del archivo properties.json que se encuentra dentro de la carpeta kraken, verificaremos que la variable URL coincida con la url donde se encuentra ejecutado GHOST
+Luego correremos el aplicativo ghost en su *version 4.5.0* y dentro del archivo properties.json que se encuentra dentro de la carpeta *kraken-4.5.0*, verificaremos que la variable URL coincida con la url donde se encuentra ejecutado GHOST
 * Una vez validemos esto estamos listos para comenzar a correr las pruebas
 * Los escenarios de prueba se encuentran en la carpeta features_wait. Uno por uno se pasara los archivos a la carpeta genral "features" y se ejecutara el comando 
 ```bash 
