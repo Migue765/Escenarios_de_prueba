@@ -236,7 +236,7 @@ Aquí tienes un instructivo mejorado y más estructurado para instalar y ejecuta
 
 
 
-## Cypress
+## Cypress 🙂‍↕️
 
 ### 1. Configura NVM
 
