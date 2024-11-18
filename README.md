@@ -252,8 +252,8 @@ export NVM_DIR="$HOME/.nvm"
 #### Se recomienda usar Node.js versión 12.10.0. Ejecuta estos comandos:
 
 ```bash
-nvm install 12.10.0    # Instala Node.js 12.10.0
-nvm use 12.10.0        # Usa la versión instalada
+nvm install 12.22.1    # Instala Node.js 12.22.1
+nvm use 12.22.1        # Usa la versión instalada
 node -v                # Verifica que la versión de Node.js sea correcta
 ```
 
