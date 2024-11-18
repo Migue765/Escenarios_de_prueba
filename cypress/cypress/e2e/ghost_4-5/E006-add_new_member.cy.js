@@ -22,28 +22,27 @@ describe('Member Management: Add and Verify Member', () => {
     it('Add a new member and verify it appears in the list of members', () => {
 
         cy.visit(LOCAL_HOST + "#/dashboard");
-        cy.wait(4000);
+        cy.wait(2000);
         takeScreenshot();
 
         // Enter the members section
-        cy.get('[data-test-nav="members"]').click();
+        cy.get('svg#members_svg__Regular').first().click();
         cy.url().should('include', '/ghost/#/members');
         takeScreenshot();
 
         // Create a new member
-        cy.get('[data-test-new-member-button]').click();
+        cy.get('a[href="#/members/new/"]').first().click();
         cy.wait(2000);
         cy.url().should('include', '/ghost/#/members/new');
         takeScreenshot();
 
-        cy.get('[data-test-input="member-name"]').type('John Doe');
-        cy.get('[data-test-input="member-email"]').type('test2a25@test.com');
+        cy.get('input#member-name').type('John Doe');
+        cy.get('input#member-email').type('test2a25@test.com');
         cy.get('.ember-power-select-trigger-multiple-input').type('Test Label{enter}');
-        cy.get('[data-test-input="member-note"]').type('Test Note');
+        cy.get('textarea#member-note').type('Test Note');
         takeScreenshot();
 
-        cy.get('[data-test-button="save"]').click();
-
+        cy.get('button.gh-btn-primary').contains('Save').click();
         cy.url().should('include', '/ghost/#/members');
         takeScreenshot();
     });
