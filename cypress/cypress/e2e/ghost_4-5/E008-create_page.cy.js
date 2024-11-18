@@ -10,7 +10,7 @@ describe('Content Management: Create and Verify Page', () => {
     }
 
     beforeEach("Precondition: Admin login", () => {
-        cy.LoginGhost();
+        cy.LoginGhost4();
     });
 
     // Handle uncaught exceptions
@@ -22,16 +22,16 @@ describe('Content Management: Create and Verify Page', () => {
     it('Create a new page and verify it appears in the list of pages', () => {
 
         cy.visit(LOCAL_HOST + "#/dashboard");
-        cy.wait(4000);
+        cy.wait(2000);
         takeScreenshot();
 
         // Enter the pages section
-        cy.get('[data-test-nav="pages"]').click();
+        cy.get('a[href="#/pages/"]').click();
         cy.url().should('include', '/ghost/#/pages');
         takeScreenshot();
 
         // Create a new page
-        cy.get('[data-test-new-page-button]').click();
+        cy.get('a[href="#/editor/page/"]').click();
         cy.wait(2000);
         cy.url().should('include', '/ghost/#/editor/page');
         takeScreenshot();
@@ -42,17 +42,16 @@ describe('Content Management: Create and Verify Page', () => {
 
         // Fill out the new page form
         cy.get('.gh-editor-title').type('My first page{enter}');
-        cy.get('[data-secondary-instance="false"]').type("hello");
+        cy.get('div[data-kg="editor-wrapper"] div[data-kg="editor"]').type("hello");
         takeScreenshot();
 
         // Publish the page
-        cy.get('[data-test-button="publish-flow"]').first().click();
-        cy.get('[data-test-button="continue"]').click();
-        cy.get('[data-test-button="confirm-publish"]').click();
+        cy.get('.gh-publishmenu-trigger').first().click();
+        cy.get('button.gh-btn.gh-btn-black.gh-publishmenu-button.gh-btn-icon').click();
         takeScreenshot();
 
         // Click the close button
-        cy.get('[data-test-button="close-publish-flow"]').click();
+        cy.get('.gh-editor-back-button').click();
         takeScreenshot();
 
         // Verify that the page has been published
