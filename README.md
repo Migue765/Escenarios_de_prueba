@@ -265,6 +265,8 @@ node -v                # Verifica que la versión de Node.js sea correcta
 cd /cypress
 ```
 
+#### Ajusta el *LOCALHOST* en el archivo *cypress.config.js*
+
 ### 4. Instala Dependencias del Proyecto
 
 #### Instala la paquetería de Node.js necesaria para el proyecto:
