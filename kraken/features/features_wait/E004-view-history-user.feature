@@ -3,13 +3,7 @@ Feature:  user profile and actions
   @user1 @web
   Scenario:  view history activity user
 
-    Given I navigate to page "<URL>"
-    When I wait for 2 seconds
-    And I enter email "<EMAIL>"
-    And I enter password "<PASSWORD>"
-    And I click sign in
-    And I wait for 3 seconds
-    When I click on the profile section
+    Given I click on the profile section
     When I click on the selection your profile
     And I wait for 3 seconds
     When I click the actions button
