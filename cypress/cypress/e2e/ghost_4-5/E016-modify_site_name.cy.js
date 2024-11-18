@@ -10,19 +10,22 @@ describe('Modify Site Name', () => {
     }
 
     beforeEach("Precondition: Admin login", () => {
-        cy.LoginGhost();
+        cy.LoginGhost4();
     });
 
     it('Modify the site name in the general settings and verify the change in the interface', () => {
         cy.visit(LOCAL_HOST + "#/settings");
         takeScreenshot();
-        cy.get('#admin-x-settings-scroller > div > div:nth-child(1) > div > div:nth-child(1) > div.flex.items-start.justify-between.gap-4 > div:nth-child(2) > div > button').click();
+        cy.get('a[href="#/settings/general/"]').first().click();
         takeScreenshot();
-        cy.get('input[placeholder="Site title"]').clear();
+        cy.get('button.gh-btn').contains('Expand').click();
         takeScreenshot();
-        cy.get('input[placeholder="Site title"]').type('New title site');
+        cy.get('input.gh-input.ember-view').clear();
+        cy.wait(1000);
+        cy.get('input.gh-input.ember-view').first().type('New title site', {force: true});
+        cy.wait(1000);
         takeScreenshot();
-        cy.get('#admin-x-settings-scroller button.cursor-pointer.bg-green').click();
+        cy.get('button.gh-btn-primary').contains('Save settings').click();
         takeScreenshot();
         cy.reload();
         takeScreenshot();
